@@ -1,5 +1,9 @@
 import React from 'react';
-import './App.css';
+import List from './components/List';
+import Register from './components/Register';
+import Login from './components/Login';
+import Profile from './components/Profile';
+import { Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -7,6 +11,10 @@ function App() {
       <header className="App-header">
         <h1>Co-Make Front End</h1>
       </header>
+    <Route exact path="/" component={List}/>
+    <Route exact path="/profile/:id" component={Profile} />
+    <Route path="/login" component={Login}/>
+    <Route path="/register" component={Register}/>
     </div>
   );
 }
