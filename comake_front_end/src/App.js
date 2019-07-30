@@ -12,6 +12,7 @@ function App() {
 
   const [token, setToken] = useLocalStorage('token', '')
   const [localId, setLocalId] = useLocalStorage('id', '')
+  const [zipCode, setZipCode] = useLocalStorage('zipcode', '')
   const [message, setMessage] = useState('')
 
   return (
@@ -38,6 +39,7 @@ function App() {
         setLocalId={setLocalId}
         message={message}
         setMessage={setMessage}
+        setZip={setZipCode}
         {...props} />}
         />
 
