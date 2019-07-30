@@ -4,6 +4,7 @@ import List from './components/List';
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import AddIssue from './components/AddIssue';
 import { Route, Redirect } from 'react-router-dom';
 import {useLocalStorage} from './hooks/useLocalStorage';
 
@@ -16,9 +17,6 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Co-Make Front End</h1>
-      </header>
 
       {/* ROUTES  */}
 
@@ -51,6 +49,13 @@ function App() {
         setMessage={setMessage}
         {...props}
       />}/>
+
+      <Route path="/addIssue" render={ props =>
+        <AddIssue setToken={setToken}
+        message={message}
+        setMessage={setMessage}
+        {...props} />}
+      />
 
     </div>
   );
