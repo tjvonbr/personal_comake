@@ -1,6 +1,26 @@
 import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Card, Icon, Image, Table } from 'semantic-ui-react';
+import styled from 'styled-components';
+
+
+const Container = styled.div`
+display: flex;
+justify-content: center;
+
+`
+const Body = styled.div`
+flex-direction: column;
+
+`
+const Nav = styled.nav`
+background-color: #99AAE7;
+color: #FFFF;
+font-family: "helvetica", sans serif;
+
+`
+
 
 
 function Profile(props) {
@@ -55,7 +75,7 @@ function Profile(props) {
             .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
         },[])
 
-  // Render Component if Editing or Not
+  // Editing form
     if (isEditing) {
       return (
         <div>
@@ -106,21 +126,25 @@ function Profile(props) {
         </div>
       );
     }
-    // Not Editing
+    // 
     return (
+        
+      <Container>
+          <Nav>
+          <a href=''>Home</a>
+          <a href=''>About Us</a>                   
+          </Nav>
       
-        <div>
-        <h2>Username:</h2>
-        <p>{currentUser.username}</p>
-        <h2>Image:</h2>
-        <p>{currentUser.image}</p>
-        <h2>Email: </h2>
-        <p>{currentUser.email}</p>
-        <h2>Location:</h2>
-        <p>{currentUser.location}</p>
-        <button onClick={handleEdit}>Edit</button>
-      </div> 
-      
+      <Body>         
+        <i class="pencil alternate icon" onClick={handleEdit}></i>
+          
+        <Card class ='card-style' header={'jessica'} image={'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'} meta={'89145'} description={'jessica@yahoo.com'} />
+        {/* <Table image={} content={}/>  */}
+      </Body> 
+      </Container>
+       
+
+    
     );
   }
   

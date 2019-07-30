@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Co-Make Front End</h1>
+        <h1>Co-Make</h1>
       </header>
 
       {/* ROUTES  */}
