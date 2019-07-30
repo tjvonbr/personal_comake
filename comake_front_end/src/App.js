@@ -1,3 +1,4 @@
+
 import React, {useState} from 'react';
 import List from './components/List';
 import Register from './components/Register';
@@ -7,6 +8,7 @@ import { Route, Redirect } from 'react-router-dom';
 import {useLocalStorage} from './hooks/useLocalStorage';
 
 function App() {
+
   const [token, setToken] = useLocalStorage('token', '')
   const [message, setMessage] = useState('')
 
@@ -15,7 +17,6 @@ function App() {
       <header className="App-header">
         <h1>Co-Make Front End</h1>
       </header>
-
 
       {/* ROUTES  */}
 
@@ -46,6 +47,7 @@ function App() {
         setMessage={setMessage}
         {...props}
       />}/>
+
     </div>
   );
 }
