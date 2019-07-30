@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function AddIssue(props) {
-  const [createIssue, setCreateIssue] = useState({ title: "", tags: "", location: "", zipCode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id") });
+  const [createIssue, setCreateIssue] = useState({ zipCode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id") });
 
   // Functionality for Post Request
   const addIssue = data => {
@@ -17,9 +17,9 @@ function AddIssue(props) {
          })
         .then( res => {
           // let thisUser = res.data.filter( user => user.id === localId )
-          console.log(res.data)
-          setCreateIssue(...createIssue, res.data);
-          
+          console.log("SUCCESS", res.data)
+          props.history.push('/')
+
       })
         .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
   }
