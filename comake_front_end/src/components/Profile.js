@@ -16,9 +16,8 @@ flex-direction: column;
 `
 const Nav = styled.nav`
 background-color: #99AAE7;
-color: #FFFF;
 font-family: "helvetica", sans serif;
-
+a {color:#FFFF;}
 `
 
 
@@ -128,12 +127,12 @@ function Profile(props) {
     }
     // 
     return (
-        
-      <Container>
-          <Nav>
+<>       <Nav>
           <a href=''>Home</a>
           <a href=''>About Us</a>                   
           </Nav>
+      <Container>
+          
       
       <Body>         
         <i class="pencil alternate icon" onClick={handleEdit}></i>
@@ -144,7 +143,7 @@ function Profile(props) {
       </Container>
        
 
-    
+    </>
     );
   }
   
