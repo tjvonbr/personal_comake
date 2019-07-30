@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 
 function Profile(props) {
     const [users, setUsers] = useState([{username: "jessica", image: "", location: "89145", id: 1 }]);
-    const [currentUser, setCurrentUser] = useState({username: "jessica", image: "", location: "89145", id: 1 })
+    const [currentUser, setCurrentUser] = useState({username: "", image: "", location: "", id: null })
     const [isEditing, setIsEditing] = useState(false);
     const [input, setInput] = useState({
       name: currentUser.name,
@@ -36,6 +36,24 @@ function Profile(props) {
             return user;
           })
         ]);
+        
+        useEffect(()=>{
+          let token = JSON.parse(localStorage.getItem('token'))
+          let localId = JSON.parse(localStorage.getItem('id'))
+          axios
+            .get('https://co-make.herokuapp.com/users/1/issues', {
+              headers: {
+                Authorization: token
+              }
+             })
+            .then( res => {
+              
+              let thisUser = res.data.filter( user => user.id === localId )
+              // console.log("Current User", thisUser)
+            setCurrentUser(thisUser)
+          })
+            .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
+        },[])
 
   // Render Component if Editing or Not
     if (isEditing) {
@@ -62,6 +80,15 @@ function Profile(props) {
                   onChange={handleInput}
                 />
               </label>
+              <label htmlFor="email">
+                Email:{" "}
+                <input
+                  type="text"
+                  value={currentUser.email}
+                  name="email"
+                  onChange={handleInput}
+                />
+              </label>
               <label htmlFor="location">
                 Location:{" "}
                 <input
@@ -83,10 +110,12 @@ function Profile(props) {
     return (
       
         <div>
-        <h2>Name:</h2>
+        <h2>Username:</h2>
         <p>{currentUser.username}</p>
         <h2>Image:</h2>
         <p>{currentUser.image}</p>
+        <h2>Email: </h2>
+        <p>{currentUser.email}</p>
         <h2>Location:</h2>
         <p>{currentUser.location}</p>
         <button onClick={handleEdit}>Edit</button>
