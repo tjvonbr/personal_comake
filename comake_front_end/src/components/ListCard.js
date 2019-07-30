@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 
-function ListCard() { 
+function ListCard(props) { 
     return (
         <section className="list-card-wrapper">
             <div className="project-thumbnail">
