@@ -1,7 +1,10 @@
 import React from 'react';
 import { Icon } from 'semantic-ui-react';
 
-function ListCard() { 
+function ListCard(props) {
+    const [count, setCount] = useState(0);
+    const [zip, setZip] = useState("");
+
     return (
         <section className="list-card-wrapper">
             <div className="project-thumbnail">
