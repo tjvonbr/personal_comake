@@ -10,6 +10,7 @@ import {useLocalStorage} from './hooks/useLocalStorage';
 function App() {
 
   const [token, setToken] = useLocalStorage('token', '')
+  const [localId, setLocalId] = useLocalStorage('id', '')
   const [message, setMessage] = useState('')
 
   return (
@@ -36,6 +37,7 @@ function App() {
         } />
       <Route exact path="/login" render={ props =>
         <Login setToken={setToken}
+        setLocalId={setLocalId}
         message={message}
         setMessage={setMessage}
         {...props} />}
