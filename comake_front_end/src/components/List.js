@@ -3,13 +3,13 @@ import axios from 'axios';
 import ListCard from './ListCard';
 
 function List(props) {
-  const [userProfile, setUserProfile] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
   useEffect(() => {
       axios
         .get('https://co-make.herokuapp.com/issues')
         .then(response => {
           console.log('Comake Projects:', response.data.results)
-          setUserProfile(response.data.results)
+          setCurrentUser(response.data.results)
         })
         .catch(error => {
           console.log('Sorry.  The API is not able to give you the data right now.', error)
