@@ -7,6 +7,7 @@ import Profile from './components/Profile';
 import AddIssue from './components/AddIssue';
 import { Route, Redirect } from 'react-router-dom';
 import {useLocalStorage} from './hooks/useLocalStorage';
+import styled from 'styled-components';
 
 function App() {
 
@@ -15,12 +16,30 @@ function App() {
   const [zipCode, setZipCode] = useLocalStorage('zipcode', '')
   const [message, setMessage] = useState('')
 
+  const Nav = styled.nav`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #5477BB;
+  font-family: 'helvetica', sans serif;
+  a {color:#FFFF;}
+  height: 90px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  `
+
   return (
     <div className="App">
 
       <header className="App-header">
-       
+      <Nav>
+          <img src='/images/logo.png' />
+          <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Home</a>
+          <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>About Us</a> 
+          <button>Logout</button>                  
+        </Nav>
       </header>
+      
 
 
       {/* ROUTES  */}

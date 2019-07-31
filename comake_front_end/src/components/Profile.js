@@ -2,8 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import EditProfile from './EditProfile';
-import { Card, Icon, Image, Table } from 'semantic-ui-react';
+import { Card, Icon, Image, Table, Modal } from 'semantic-ui-react';
 import styled from 'styled-components';
+import ProfileTable from './ProfileTable';
 
 
 const Container = styled.div`
@@ -15,11 +16,11 @@ const Body = styled.div`
 flex-direction: column;
 
 `
-const Nav = styled.nav`
-background-color: #99AAE7;
-font-family: "helvetica", sans serif;
-a {color:#FFFF;}
-`
+// const Nav = styled.nav`
+// background-color: #99AAE7;
+// font-family: "helvetica", sans serif;
+// a {color:#FFFF;}
+// `
 
 function Profile(props) {
     const [currentUser, setCurrentUser] = useState("")
@@ -47,17 +48,18 @@ function Profile(props) {
 
     return (
       <>
-        <Nav>
+        {/* <Nav>
           <a href=''>Home</a>
           <a href=''>About Us</a>                   
-        </Nav>
+        </Nav> */}
         <Container>
        
       { !isEditing ? (
           <Body>         
         <i class="pencil alternate icon" onClick={handleEdit}></i>
-        <Card class ='card-style' header={currentUser.username} image={currentUser.image} meta={currentUser.zipCode} description={currentUser.email} />
-        {/* <Table image={} content={}/>  */}
+        <Card header={'jessica'} image={'https://www.argospetinsurance.co.uk/assets/uploads/2017/10/pexels-photo-416160.jpeg'} meta={'89145'} description={'buildweek@gmail.com'} />
+        <Table image={'Issue Picture'} thead={'hi'} content={'Issue Title'} header={'Issue Description'} td={'Number Upvotes'}/> 
+        <Modal header={'Profile'} image={currentUser.image} description={handleEdit} deny={'Close'} positive={'Submit'}/>
           </Body> 
         ) : <EditProfile
             handleEdit={handleEdit}
