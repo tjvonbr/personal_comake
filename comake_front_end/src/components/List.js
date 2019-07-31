@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import ListCard from './ListCard';
+import FooterNav from './FooterNav';
 
 function List(props) {
   const [currentUser, setCurrentUser] = useState({});
   const [issues, setIssues] = useState([]);
+
+
+  let localId = JSON.parse(localStorage.getItem('id'))
+  let token = JSON.parse(localStorage.getItem('token'))
+
   useEffect(() => {
-      let token = JSON.parse(localStorage.getItem('token'))
-      let localId = JSON.parse(localStorage.getItem('id'))
       axios
         .get('https://co-make.herokuapp.com/issues', {
           headers: {
@@ -20,7 +23,7 @@ function List(props) {
           // let thisUser = res.data.filter( user => user.id === localId )
           console.log(res.data)
           setIssues(res.data);
-          
+
       })
         .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
     },[])
@@ -38,33 +41,18 @@ function List(props) {
       </UserWrapper>
   { issues.map( issue => <ListCard key={issue.id} data={issue}  /> )}
 
-      {/* Buttons */}
+      <div className="footer-wrapper">
+        <FooterNav />
+      </div>
 
-      <footer className="list-footer">
-        <button className="footer-button feed">
-          <p>Feed</p>
-        </button>
-
-        <Link to="/addIssue">
-          <button className="footer-button add-post">
-            <p>+</p>
-          </button>
-        </Link>
-
-        <Link to="/profile/:id">
-          <button className="footer-button profile">
-            <p>Profile</p>
-          </button>
-        </Link>
-
-      </footer>
     </ListWrapper>
   )
 }
 
 const ListWrapper = styled.div`
-  max-width: 480px;
+  max-width: 1024px;
   width: 100%;
+  margin: 0 auto;
   border: 1px solid black;
 `
 
