@@ -81,7 +81,7 @@ function Profile(props) {
 
     return (
       <>
-        
+
         <Container>
 
       { isEditingUser ? (
@@ -104,19 +104,11 @@ function Profile(props) {
         : (
           <Body>
         <i class="pencil alternate icon" onClick={handleEdit}></i>
-        <Card header={currentUser.username} image={currentUser.image} meta={currentUser.zipCode} description={currentUser.email} />
-        <ProfileTable /> 
-        { !currentUser.issues ? <p>Loading...</p>
-        : currentUser.issues.map( issue =>
-        <>
-        <h4>{issue.issue_name}</h4>
-        <p>{issue.desciption}</p>
-          
-        <button onClick={()=> deleteIssue(issue.id)}>delete</button>
-        <button onClick={()=> handleEditIssue(issue.id)}>Edit</button>
-        </>)}
-          </Body>
+        <Card className='card' header={currentUser.username} image='https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' meta={currentUser.zipCode} description={currentUser.email} />
+        <ProfileTable currentUser={currentUser} handleEditIssue={handleEditIssue} deleteIssue={deleteIssue} />
+
       <Modal header={'Profile'} image={currentUser.image} description={handleEdit} deny={'Close'} positive={'Submit'}/>
+          </Body>
         )
         }
        </Container>

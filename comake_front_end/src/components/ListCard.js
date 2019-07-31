@@ -8,12 +8,15 @@ function ListCard(props) {
 
   return (
     <ListCardWrapper>
-      <ProjectDescription>
-        <ProjectTitle>{props.data.issue_name}</ProjectTitle>
-        <p>Categories:  {props.data.category}</p>
-        <address>Location:  {props.data.zipCode}</address>
-        <p>Description:  {props.data.description}</p>
-      </ProjectDescription>
+      <IssueWrapper>
+        <ProjectImage src={props.data.picture} />
+        <ProjectDescription>
+          <ProjectTitle>{props.data.issue_name}</ProjectTitle>
+          <p>Categories:  {props.data.category}</p>
+          <address>Location:  {props.data.zipCode}</address>
+          <p>Description:  {props.data.description}</p>
+        </ProjectDescription>
+      </IssueWrapper>
       <UpvoteCount>
         <Icon name="arrow up" />
         <button className="upvote-btn" onClick={ () => setCount(count + 1)}>{count} upvotes</button>
@@ -25,6 +28,15 @@ function ListCard(props) {
 const ListCardWrapper = styled.section`
   padding: 30px 0px;
   border-bottom: 1px solid black;
+`
+
+const IssueWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+`
+
+const ProjectImage = styled.img`
+  text-align: center;
 `
 
 const ProjectDescription = styled.div`
