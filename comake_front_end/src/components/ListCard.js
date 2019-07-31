@@ -16,7 +16,7 @@ function ListCard(props) {
       <UpvoteCount>
         <span>
           <Icon name="arrow up" />
-          <p>{count} upvotes</p>
+          {count} upvotes
         </span>
       </UpvoteCount>
     </ListCardWrapper>
