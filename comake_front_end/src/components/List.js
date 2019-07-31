@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import ListCard from './ListCard';
+import FooterNav from './FooterNav';
 
 function List(props) {
   const [currentUser, setCurrentUser] = useState({});
   const [issues, setIssues] = useState([]);
+
+
   let localId = JSON.parse(localStorage.getItem('id'))
   let token = JSON.parse(localStorage.getItem('token'))
 
@@ -39,33 +41,40 @@ function List(props) {
       </UserWrapper>
   { issues.map( issue => <ListCard key={issue.id} data={issue}  /> )}
 
+      <div className="footer-wrapper">
+        <FooterNav />
+      </div>
+
+
       {/* Buttons */}
 
-      <footer className="list-footer">
-        <button className="footer-button feed">
-          <p>Feed</p>
-        </button>
+//       <footer className="list-footer">
+//         <button className="footer-button feed">
+//           <p>Feed</p>
+//         </button>
 
-        <Link to="/addIssue">
-          <button className="footer-button add-post">
-            <p>+</p>
-          </button>
-        </Link>
+//         <Link to="/addIssue">
+//           <button className="footer-button add-post">
+//             <p>+</p>
+//           </button>
+//         </Link>
 
-        <Link to={`/profile/${localId}`}>
-          <button className="footer-button profile">
-            <p>Profile</p>
-          </button>
-        </Link>
+//         <Link to={`/profile/${localId}`}>
+//           <button className="footer-button profile">
+//             <p>Profile</p>
+//           </button>
+//         </Link>
 
-      </footer>
+//       </footer>
+
     </ListWrapper>
   )
 }
 
 const ListWrapper = styled.div`
-  max-width: 480px;
+  max-width: 1024px;
   width: 100%;
+  margin: 0 auto;
   border: 1px solid black;
 `
 
