@@ -4,6 +4,7 @@ import List from './components/List';
 import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
+import AddIssue from './components/AddIssue';
 import { Route, Redirect } from 'react-router-dom';
 import {useLocalStorage} from './hooks/useLocalStorage';
 
@@ -11,13 +12,16 @@ function App() {
 
   const [token, setToken] = useLocalStorage('token', '')
   const [localId, setLocalId] = useLocalStorage('id', '')
+  const [zipCode, setZipCode] = useLocalStorage('zipcode', '')
   const [message, setMessage] = useState('')
 
   return (
     <div className="App">
+
       <header className="App-header">
        
       </header>
+
 
       {/* ROUTES  */}
 
@@ -40,6 +44,7 @@ function App() {
         setLocalId={setLocalId}
         message={message}
         setMessage={setMessage}
+        setZip={setZipCode}
         {...props} />}
         />
 
@@ -49,6 +54,13 @@ function App() {
         setMessage={setMessage}
         {...props}
       />}/>
+
+      <Route path="/addIssue" render={ props =>
+        <AddIssue setToken={setToken}
+        message={message}
+        setMessage={setMessage}
+        {...props} />}
+      />
 
     </div>
   );
