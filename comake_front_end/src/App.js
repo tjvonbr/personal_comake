@@ -11,10 +11,17 @@ import {useLocalStorage} from './hooks/useLocalStorage';
 function App() {
 
   const [token, setToken] = useLocalStorage('token', '')
+  const [localId, setLocalId] = useLocalStorage('id', '')
+  const [zipCode, setZipCode] = useLocalStorage('zipcode', '')
   const [message, setMessage] = useState('')
 
   return (
     <div className="App">
+
+      <header className="App-header">
+       
+      </header>
+
 
       {/* ROUTES  */}
 
@@ -34,8 +41,10 @@ function App() {
         } />
       <Route exact path="/login" render={ props =>
         <Login setToken={setToken}
+        setLocalId={setLocalId}
         message={message}
         setMessage={setMessage}
+        setZip={setZipCode}
         {...props} />}
         />
 

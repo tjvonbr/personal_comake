@@ -68,6 +68,8 @@ export default withFormik({
           formikBag.props.setMessage('')
           console.log("Success!", res)
           formikBag.props.setToken(res.data.token)
+          formikBag.props.setLocalId(res.data.id)
+          formikBag.props.setZip(res.data.zipCode)
           formikBag.props.history.push("/");
         })
 
