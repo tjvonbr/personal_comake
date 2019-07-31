@@ -1,9 +1,9 @@
 import React from 'react';
 import { Table, Header, Image } from 'semantic-ui-react';
+import ProfileTableRow from './ProfileTableRow';
 
 
-
-function ProfileTable() {    
+function ProfileTable(props) {
     return (
     <Table basic='very' celled collapsing>
     <Table.Header>
@@ -14,21 +14,14 @@ function ProfileTable() {
     </Table.Header>
 
     <Table.Body>
-      <Table.Row>
-        <Table.Cell>
-          <Header as='h4' image>
-            <Image src='' rounded size='mini' />
-            <Header.Content>
-              Issue Title
-              <Header.Subheader>Issue Description</Header.Subheader>
-            </Header.Content>
-          </Header>
-        </Table.Cell>
-        <Table.Cell>Upvotes</Table.Cell>
-      </Table.Row>
-      </Table.Body>
+    { !props.currentUser.issues ? <p>Loading...</p>
+        : props.currentUser.issues.map( issue =>
+          <ProfileTableRow issue={issue} handleEditIssue={props.handleEditIssue} deleteIssue={props.deleteIssue} />
+        )}
+    </Table.Body>
     </Table>
       )
 }
 
 export default ProfileTable;
+

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function FooterNav() {
+  let localId = JSON.parse(localStorage.getItem('id'))
   return (
     <FooterWrapper>
       <Button type="feed">Feed</Button>

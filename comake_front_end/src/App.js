@@ -1,4 +1,4 @@
-
+import Logo from './images/logo.png'
 import React, {useState} from 'react';
 import List from './components/List';
 import Register from './components/Register';
@@ -8,6 +8,7 @@ import AddIssue from './components/AddIssue';
 import { Route, Redirect } from 'react-router-dom';
 import {useLocalStorage} from './hooks/useLocalStorage';
 import styled from 'styled-components';
+
 
 function App() {
 
@@ -33,13 +34,13 @@ function App() {
 
       <header className="App-header">
       <Nav>
-          <img src='/images/logo.png' />
+          {/* <img src={Logo} /> */}
           <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Home</a>
-          <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>About Us</a> 
-          <button>Logout</button>                  
+          <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>About Us</a>
+          <button>Logout</button>
         </Nav>
       </header>
-      
+
 
 
       {/* ROUTES  */}

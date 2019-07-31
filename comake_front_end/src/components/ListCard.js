@@ -9,9 +9,8 @@ function ListCard(props) {
   return (
     <ListCardWrapper>
       <IssueWrapper>
-        <ProjectImage>
-          {props.data.picture}
-        </ProjectImage>
+
+        <ProjectImage src={props.data.picture} />
         <ProjectDescription>
           <ProjectTitle>{props.data.issue_name}</ProjectTitle>
           <p>Categories:  {props.data.category}</p>
@@ -24,6 +23,7 @@ function ListCard(props) {
         </ProjectDescription>
       </IssueWrapper>
       
+
     </ListCardWrapper>
   )
 }
@@ -38,7 +38,8 @@ const IssueWrapper = styled.div`
   justify-content: space-around;
 `
 
-const ProjectImage = styled.div`
+
+const ProjectImage = styled.img`
   text-align: center;
 `
 
