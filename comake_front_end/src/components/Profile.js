@@ -58,7 +58,7 @@ function Profile(props) {
           <Body>         
         <i class="pencil alternate icon" onClick={handleEdit}></i>
         <Card header={'jessica'} image={'https://www.argospetinsurance.co.uk/assets/uploads/2017/10/pexels-photo-416160.jpeg'} meta={'89145'} description={'buildweek@gmail.com'} />
-        <Table image={'Issue Picture'} thead={'hi'} content={'Issue Title'} header={'Issue Description'} td={'Number Upvotes'}/> 
+        <ProfileTable /> 
         <Modal header={'Profile'} image={currentUser.image} description={handleEdit} deny={'Close'} positive={'Submit'}/>
           </Body> 
         ) : <EditProfile

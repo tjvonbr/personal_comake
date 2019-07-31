@@ -3,17 +3,8 @@ import { Table, Header, Image } from 'semantic-ui-react';
 
 
 
-function ProfileTable() {    
+function ProfileTableRow() {    
     return (
-    <Table basic='very' celled collapsing>
-    <Table.Header>
-      <Table.Row>
-        <Table.HeaderCell>Issue</Table.HeaderCell>
-        <Table.HeaderCell>Upvotes</Table.HeaderCell>
-      </Table.Row>
-    </Table.Header>
-
-    <Table.Body>
       <Table.Row>
         <Table.Cell>
           <Header as='h4' image>
@@ -26,8 +17,6 @@ function ProfileTable() {
         </Table.Cell>
         <Table.Cell>Upvotes</Table.Cell>
       </Table.Row>
-      </Table.Body>
-    </Table>
       )
 }
 
