@@ -10,14 +10,12 @@ function ListCard(props) {
       <ProjectDescription>
         <ProjectTitle>{props.data.issue_name}</ProjectTitle>
         <p>Categories:  {props.data.category}</p>
-        <address>{props.data.zipCode}</address>
+        <address>Location:  {props.data.zipCode}</address>
         <p>Description:  {props.data.description}</p>
       </ProjectDescription>
       <UpvoteCount>
-        <span>
-          <Icon name="arrow up" />
-          {count} upvotes
-        </span>
+        <Icon name="arrow up" />
+        <button className="upvote-btn" onClick={ () => setCount(count + 1)}>{count} upvotes</button>
       </UpvoteCount>
     </ListCardWrapper>
   )
@@ -25,7 +23,6 @@ function ListCard(props) {
 
 const ListCardWrapper = styled.section`
   padding: 30px 0px;
-  border-top: 1px solid black;
   border-bottom: 1px solid black;
 `
 
