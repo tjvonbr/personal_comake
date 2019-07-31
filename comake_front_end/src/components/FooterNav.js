@@ -23,7 +23,6 @@ function FooterNav() {
 const FooterWrapper = styled.div`
   max-width: 1024px;
   width: 100%;
-  height: 200px;
 `
 
 const Button = styled.button`
