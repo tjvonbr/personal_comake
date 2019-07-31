@@ -18,6 +18,11 @@ function App() {
   return (
     <div className="App">
 
+      <header className="App-header">
+       
+      </header>
+
+
       {/* ROUTES  */}
 
       <Route exact path="/" render={ props =>
