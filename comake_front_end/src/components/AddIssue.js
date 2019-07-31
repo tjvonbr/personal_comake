@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
 function AddIssue(props) {
   const [createIssue, setCreateIssue] = useState({ zipCode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id") });
@@ -43,62 +44,70 @@ function AddIssue(props) {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <fieldset>
-        <div className="signup-header">
-          <legend>Create Issue</legend>
-        </div>
-          <div className="form-group row">
-            <label htmlFor="name" className="column-sm-2 col-form-label">
-              Project Title
-              <div className="col-sm-10">
-                <input
-                  type="text"
-                  className="form-control"
-                  name="issue_name"
-                  placeholder="Add a title"
-                  value={createIssue.issue_name}
-                  onChange={handleChange}
-                />
-              </div>
-            </label>
+    <FormWrapper>
+      <form className="form" onSubmit={handleSubmit}>
+        <fieldset>
+          <div className="signup-header">
+            <legend>Create Issue</legend>
           </div>
-          <div className="form-group">
-            <label htmlFor="email" className="column-sm-2 col-form-label">
-              Category
-              <div className="col-sm-10">
-                <input
-                  type="text"
-                  className="form-control"
-                  name="category"
-                  placeholder="Add relevant tags"
-                  value={createIssue.category}
-                  onChange={handleChange}
-                />
-              </div>
-            </label>
-          </div>
-          <div className="form-group">
-            <label htmlFor="role" className="column-sm-2 col-form-label">
-              Description
-              <div className="col-sm-10">
-                <input
-                  type="text"
-                  className="form-control"
-                  name="description"
-                  placeholder="Please add a description"
-                  value={createIssue.description}
-                  onChange={handleChange}
-                />
-              </div>
-            </label>
-          </div>
-            <button type="submit" className="btn btn-post">
-              Submit
-            </button>
-        </fieldset>
-      </form>
-  )
+            <div className="form-group row">
+              <label htmlFor="name" className="column-sm-2 col-form-label">
+                Project Title
+                <div className="col-sm-10">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="issue_name"
+                    placeholder="Add a title"
+                    value={createIssue.issue_name}
+                    onChange={handleChange}
+                  />
+                </div>
+              </label>
+            </div>
+            <div className="form-group">
+              <label htmlFor="email" className="column-sm-2 col-form-label">
+                Category
+                <div className="col-sm-10">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="category"
+                    placeholder="Add relevant tags"
+                    value={createIssue.category}
+                    onChange={handleChange}
+                  />
+                </div>
+              </label>
+            </div>
+            <div className="form-group">
+              <label htmlFor="role" className="column-sm-2 col-form-label">
+                Description
+                <div className="col-sm-10">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="description"
+                    placeholder="Please add a description"
+                    value={createIssue.description}
+                    onChange={handleChange}
+                  />
+                </div>
+              </label>
+            </div>
+              <button type="submit" className="btn btn-post">
+                Submit
+              </button>
+          </fieldset>
+        </form>
+      </FormWrapper>
+  ) 
 }
 
 export default AddIssue;
+
+const FormWrapper = styled.div`
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+`
