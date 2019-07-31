@@ -45,28 +45,6 @@ function List(props) {
         <FooterNav />
       </div>
 
-
-      {/* Buttons */}
-
-//       <footer className="list-footer">
-//         <button className="footer-button feed">
-//           <p>Feed</p>
-//         </button>
-
-//         <Link to="/addIssue">
-//           <button className="footer-button add-post">
-//             <p>+</p>
-//           </button>
-//         </Link>
-
-//         <Link to={`/profile/${localId}`}>
-//           <button className="footer-button profile">
-//             <p>Profile</p>
-//           </button>
-//         </Link>
-
-//       </footer>
-
     </ListWrapper>
   )
 }
