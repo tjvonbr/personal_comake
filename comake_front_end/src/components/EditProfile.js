@@ -31,7 +31,16 @@ function EditProfile(props) {
               }
              })
             .then( res => {
-            props.setCurrentUser(res.data)
+              axios.get(`https://co-make.herokuapp.com/users/${localId}/issues`, {
+                headers: {
+                  Authorization: token
+                }
+               }).then( res => {
+                 console.log("NEW DATA FROM SERVER", res)
+                 props.setCurrentUser(res.data)
+               }).catch( err => {
+                 console.log("OH NO", err)
+               })
           })
             .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
       }
