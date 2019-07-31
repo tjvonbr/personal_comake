@@ -3,11 +3,11 @@ import axios from 'axios';
 import styled from 'styled-components';
 import ListCard from './ListCard';
 import FooterNav from './FooterNav';
+import image from '../images/bermuda/bermuda-welcome.png';
 
 function List(props) {
   const [currentUser, setCurrentUser] = useState({});
   const [issues, setIssues] = useState([]);
-  
   useEffect(() => {
       let token = JSON.parse(localStorage.getItem('token'))
       let localId = JSON.parse(localStorage.getItem('id'))
@@ -30,6 +30,7 @@ function List(props) {
     <ListWrapper>
       <UserWrapper>
         <UserInfo>Robert Downey</UserInfo>
+        <WelcomeImage src={image} alt="Welcome Image"/>
         <UserAddress></UserAddress>
         <LocationWrapper>
             <LocationInfo></LocationInfo>
@@ -38,9 +39,9 @@ function List(props) {
         </LocationWrapper>
       </UserWrapper>
   { issues.map( issue => <ListCard key={issue.id} data={issue}  /> )}
-      <div className="footer-wrapper">
-        <FooterNav />
-      </div>
+    <div className="footer-wrapper">
+      <FooterNav />
+    </div>
     </ListWrapper>
   )
 }
@@ -57,13 +58,19 @@ const UserWrapper = styled.div`
   padding-top: 50px;
   padding-bottom: 30px;
   border-bottom: 1px solid black;
+  height: 500px;
+`
+
+const WelcomeImage = styled.img`
+  height: 200px;
+  width: 200px;
 `
 
 const UserInfo = styled.p`
   margin: 0px;
-  padding-left: 150px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 36px;
+  text-align: center;
 `
 
 const UserAddress = styled.address`
