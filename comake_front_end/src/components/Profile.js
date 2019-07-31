@@ -2,9 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import EditProfile from './EditProfile';
+import { Card, Icon, Image, Table, Modal } from 'semantic-ui-react';
 import EditIssue from './EditIssue';
-import { Card, Icon, Image, Table } from 'semantic-ui-react';
 import styled from 'styled-components';
+import ProfileTable from './ProfileTable';
 
 
 const Container = styled.div`
@@ -16,11 +17,11 @@ const Body = styled.div`
 flex-direction: column;
 
 `
-const Nav = styled.nav`
-background-color: #99AAE7;
-font-family: "helvetica", sans serif;
-a {color:#FFFF;}
-`
+// const Nav = styled.nav`
+// background-color: #99AAE7;
+// font-family: "helvetica", sans serif;
+// a {color:#FFFF;}
+// `
 
 function Profile(props) {
     const [currentUser, setCurrentUser] = useState("")
@@ -80,14 +81,12 @@ function Profile(props) {
 
     return (
       <>
-        <Nav>
-          <a href=''>Home</a>
-          <a href=''>About Us</a>
-        </Nav>
+        
         <Container>
 
       { isEditingUser ? (
         <EditProfile
+
             handleEdit={handleEdit}
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
@@ -105,17 +104,19 @@ function Profile(props) {
         : (
           <Body>
         <i class="pencil alternate icon" onClick={handleEdit}></i>
-        <Card class ='card-style' header={currentUser.username} image={currentUser.image} meta={currentUser.zipCode} description={currentUser.email} />
-        {/* <Table image={} content={}/>  */}
+        <Card header={currentUser.username} image={currentUser.image} meta={currentUser.zipCode} description={currentUser.email} />
+        <ProfileTable /> 
         { !currentUser.issues ? <p>Loading...</p>
         : currentUser.issues.map( issue =>
         <>
         <h4>{issue.issue_name}</h4>
         <p>{issue.desciption}</p>
+          
         <button onClick={()=> deleteIssue(issue.id)}>delete</button>
         <button onClick={()=> handleEditIssue(issue.id)}>Edit</button>
         </>)}
           </Body>
+      <Modal header={'Profile'} image={currentUser.image} description={handleEdit} deny={'Close'} positive={'Submit'}/>
         )
         }
        </Container>
