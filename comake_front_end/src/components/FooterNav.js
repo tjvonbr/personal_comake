@@ -10,9 +10,9 @@ function FooterNav() {
       <Link to="/addIssue">
         <Button type="create">+</Button>
       </Link>
-      
 
-      <Link to="/profile/:id">
+
+      <Link to={`/profile/${localId}`}>
         <Button type="profile">Profile</Button>
       </Link>
     </FooterWrapper>
@@ -25,7 +25,7 @@ const FooterWrapper = styled.div`
 `
 
 const Button = styled.button`
-  background: lightgray; 
+  background: lightgray;
 `
 
 export default FooterNav;

@@ -8,9 +8,10 @@ import image from '../images/bermuda/bermuda-welcome.png';
 function List(props) {
   const [currentUser, setCurrentUser] = useState({});
   const [issues, setIssues] = useState([]);
+  let localId = JSON.parse(localStorage.getItem('id'))
+  let token = JSON.parse(localStorage.getItem('token'))
+
   useEffect(() => {
-      let token = JSON.parse(localStorage.getItem('token'))
-      let localId = JSON.parse(localStorage.getItem('id'))
       axios
         .get('https://co-make.herokuapp.com/issues', {
           headers: {
@@ -21,7 +22,7 @@ function List(props) {
           // let thisUser = res.data.filter( user => user.id === localId )
           console.log(res.data)
           setIssues(res.data);
-          
+
       })
         .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
     },[])
@@ -39,9 +40,11 @@ function List(props) {
         </LocationWrapper>
       </UserWrapper>
   { issues.map( issue => <ListCard key={issue.id} data={issue}  /> )}
+
     <div className="footer-wrapper">
       <FooterNav />
     </div>
+
     </ListWrapper>
   )
 }

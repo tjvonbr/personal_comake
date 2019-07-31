@@ -22,6 +22,16 @@ function Register({touched, errors, history }, ) {
         <p>{touched.email && errors.email}</p>
       </div>
       <div className="form-group">
+        <label className="label">Username:</label>
+        <Field
+          className="input"
+          name="username"
+          type="text"
+          autoComplete="off"
+        />
+        <p>{touched.username && errors.username}</p>
+      </div>
+      <div className="form-group">
         <label className="label">Password:</label>
         <Field
           className="input"
@@ -53,6 +63,7 @@ export default withFormik({
     mapPropsToValues() {
       return {
         email: "",
+        username: "",
         password: "",
         zipCode: ""
 
@@ -61,6 +72,8 @@ export default withFormik({
     validationSchema: Yup.object().shape({
       email: Yup.string()
         .email()
+        .required(),
+      username: Yup.string()
         .required(),
       password: Yup.string()
         // .min(6)
