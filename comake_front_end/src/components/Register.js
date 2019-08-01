@@ -1,103 +1,101 @@
-import React from 'react'
-import { withFormik, Form, Field, setNestedObjectValues } from "formik";
-import * as Yup from "yup";
+import React, {useState} from 'react'
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import axios from 'axios';
-// import {Redirect} from 'react-router-dom';
+import Logo from '../images/logo.png'
 
-function Register({touched, errors, history }, ) {
 
-    return (
-        <div>
-            <p>Register</p>
+function Register(props) {
+  const [inputData, setInputData] = useState({email: "", password:"", username:"", zipCode:""})
 
-            <Form className="form">
-      <div className="form-group">
-        <label className="label">Email:</label>
-        <Field
-          className="input"
-          name="email"
-          type="text"
-          autoComplete="off"
-        />
-        <p>{touched.email && errors.email}</p>
-      </div>
-      <div className="form-group">
-        <label className="label">Username:</label>
-        <Field
-          className="input"
-          name="username"
-          type="text"
-          autoComplete="off"
-        />
-        <p>{touched.username && errors.username}</p>
-      </div>
-      <div className="form-group">
-        <label className="label">Password:</label>
-        <Field
-          className="input"
-          name="password"
-          type="password"
-          autoComplete="off"
-        />
-      </div>
-      <p>{touched.password && errors.password}</p>
-      <div className="form-group">
-        <label className="label">Zip Code:</label>
-        <Field
-          className="input"
-          name="zipCode"
-          type="zipCode"
-          autoComplete="off"
-        />
-      </div>
-      <p>{touched.zipCode && errors.zipCode}</p>
-      <button type="submit" className="btn">Submit </button>
-      <button className="btn" onClick={()=> history.push('/login')}> Log In </button>
-    </Form>
-        </div>
-    )
-}
+  const handleInput = e => {
+    setInputData({ ...inputData, [e.target.name]: e.target.value });
+  };
 
-export default withFormik({
-
-    mapPropsToValues() {
-      return {
-        email: "",
-        username: "",
-        password: "",
-        zipCode: ""
-
-      };
-    },
-    validationSchema: Yup.object().shape({
-      email: Yup.string()
-        .email()
-        .required(),
-      username: Yup.string()
-        .required(),
-      password: Yup.string()
-        // .min(6)
-        .required(),
-       zipCode: Yup.number()
-        // .min(6)
-        .required("You Need a Zip Code to Register")
-    }),
-    handleSubmit(values, formikBag) {
-      console.log(values)
-      const url =
+  const loginHandler = e => {
+    e.preventDefault()
+    const url =
         "https://co-make.herokuapp.com/auth/register";
       axios
-        .post(url, values)
+        .post(url, inputData)
         .then( res => {
 
-          formikBag.props.setMessage("Successfully Registered!")
-
-          formikBag.props.history.push("/login");
-        console.log("Success!", res)
+          props.setMessage("Successfully Registered!")
+          console.log("Success!", res)
+          props.history.push("/");
         })
 
         .catch(err => {
-          console.log("Error", err);
+          console.log("Register PROBLEM0", err);
         });
-    }
-  })(Register);
+  }
+
+  return (
+
+    <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as='h2' color='teal' textAlign='center'>
+          <Image src={Logo} /> Create a new account
+        </Header>
+        <Header as="h4" color='green' textAlign='center'>{props.message}</Header>
+        <Form size='large' onSubmit={loginHandler}>
+          <Segment stacked>
+            <Form.Input
+            fluid icon='mail'
+            name="email"
+            value={inputData.email}
+            onChange={handleInput}
+            iconPosition='left'
+            placeholder='E-mail address'
+             />
+
+            <Form.Input
+              fluid
+              icon='user'
+              iconPosition='left'
+              placeholder='Username'
+              type='username'
+              name="username"
+              value={inputData.username}
+              onChange={handleInput}
+            />
+            <Form.Input
+              fluid
+              icon='map'
+              iconPosition='left'
+              placeholder='Zipcode'
+              type='zipCode'
+              name="zipCode"
+              value={inputData.zipCode}
+              onChange={handleInput}
+            />
+
+            <Form.Input
+              fluid
+              icon='lock'
+              iconPosition='left'
+              placeholder='Password'
+              type='password'
+              name="password"
+              value={inputData.password}
+              onChange={handleInput}
+            />
+
+            <Button type="submit" color='facebook' fluid size='large'>
+              Register
+            </Button>
+          </Segment>
+        </Form>
+        <Message>
+          Return to Login?
+          <Button className="register-button"
+          onClick={()=> props.history.push('/login')}
+          content='Back'
+          positive
+          size='mini' />
+        </Message>
+      </Grid.Column>
+    </Grid>
+  )
+}
+
+export default Register
