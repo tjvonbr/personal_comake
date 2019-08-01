@@ -115,7 +115,6 @@ function Profile(props) {
        </Container>
       </>
     )
-
   }
 
   export default Profile;
