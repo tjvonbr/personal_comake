@@ -8,7 +8,7 @@ import AddIssue from './components/AddIssue';
 import { Route, Redirect, Link } from 'react-router-dom';
 import {useLocalStorage} from './hooks/useLocalStorage';
 import styled from 'styled-components';
-
+import './App.css';
 
 function App(props) {
 
