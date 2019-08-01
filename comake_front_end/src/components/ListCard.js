@@ -6,6 +6,7 @@ import axios from 'axios'
 
 function ListCard(props) {
   const [count, setCount] = useState(0);
+  const [upvotes, setUpvotes] = useState(0)
   let token = JSON.parse(localStorage.getItem('token'))
   useEffect(() => {
     axios
@@ -17,11 +18,13 @@ function ListCard(props) {
       .then( res => {
         // let thisUser = res.data.filter( user => user.id === localId )
         console.log("upvote data", res)
-
+        setUpvotes(res.data);
 
     })
       .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
   },[])
+
+  upvote:
 
   return (
 
