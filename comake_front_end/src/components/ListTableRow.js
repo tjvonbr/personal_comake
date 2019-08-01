@@ -68,11 +68,15 @@ function ListTableRow(props) {
             </Header.Content>
           </Header>
         </Table.Cell>
+        <Table.Cell textAlign="center">
+          Category
+        </Table.Cell>
         <Table.Cell>
             <UpvoteCount>
 
-                <Icon className="arrow circle up" onClick={ upvoteHandler} />
-                {upvotes} upvotes
+                <Icon className="arrow circle up" 
+                      onClick={ upvoteHandler } />
+                      {upvotes} upvotes
             </UpvoteCount> 
 
         </Table.Cell>

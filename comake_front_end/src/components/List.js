@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import ListCard from './ListCard';
 import FooterNav from './FooterNav';
 import ListTable from './ListTable';
-import { Button } from 'semantic-ui-react'
+import { Button, Image, Card, Icon } from 'semantic-ui-react'
 import styles from '../styles/listStyles.css';
 
 function List(props) {
   const [issues, setIssues] = useState([]);
   const [currentUser, setCurrentUser] = useState({})
+  const [issuesCreated, setIssuesCreated] = useState([]);
+
   let localId = JSON.parse(localStorage.getItem('id'))
   let token = JSON.parse(localStorage.getItem('token'))
   useEffect(() => {
@@ -31,6 +33,7 @@ function List(props) {
             .then( res => {
             console.log("USER DATA FROM SERVER", res)
             setCurrentUser(res.data)
+            setIssuesCreated(res.data.issues.length)
           })
             .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
 
@@ -39,16 +42,27 @@ function List(props) {
     },[])
 
   return (
+    <>
+      <Card className="user-card"
+        raised
+        centered
+        image={currentUser.picture}
+        header={currentUser.username}
+        meta={currentUser.zipCode}
+        description={`You have posted ${issuesCreated} times since joining Comake!`}
+      />
+  
     <ListWrapper>
-      <UserWrapper>
+      {/* <UserWrapper>
         <UserInfo className="user-header">{currentUser.username}</UserInfo>
         <UserAddress className="user-address">{currentUser.zipCode}</UserAddress>
+        <Image src={currentUser.picture} size='medium' rounded />
         <LocationWrapper>
             <LocationInfo></LocationInfo>
             <LocationInfo>Filter</LocationInfo>
             <LocationInfo>Sort by:</LocationInfo>
         </LocationWrapper>
-      </UserWrapper>
+      </UserWrapper> */}
 
       {/* Issues List */}
       <ListTable issues={issues}/>
@@ -59,25 +73,23 @@ function List(props) {
           <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>Create an Issue</a>
           <a href="#">Profile</a> */}
           <Button.Group widths="3" size="big">
-            {/* <Link to="#"> */}
-              <Button icon="list alternate outline"
-                      content='Feed'
-              />
-            {/* </Link> */}
-            {/* <Link to="/addIssue"> */}
-              <Button icon="add" 
-                      content='Create Issue'
-              />
-            {/* </Link> */}
-            {/* <Link to="/profile/:id"> */}
-              <Button icon="user" 
-                      content='Profile'
-              />
-            {/* </Link> */}
+            <Button icon="list alternate outline"
+                    content='Feed'
+                    onClick={() => props.history.push("#")}
+            />
+            <Button icon="add" 
+                    content='Create Issue'
+                    onClick={() => props.history.push("/addIssue")}
+            />
+            <Button icon="user" 
+                    content='Profile'
+                    onClick={() => props.history.push(`/profile/${localId}`)}
+            />
           </Button.Group>
         </Nav>
       </footer>
     </ListWrapper>
+    </>
   )
 }
 
@@ -85,9 +97,7 @@ const ListWrapper = styled.div`
   max-width: 1024px;
   width: 100%;
   margin: 0 auto;
-  border-right: 1px solid black;
   border-bottom: 1px solid black;
-  border-left: 1px solid black;
 `
 
 const UserWrapper = styled.div`
