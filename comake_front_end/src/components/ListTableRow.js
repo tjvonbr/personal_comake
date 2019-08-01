@@ -46,16 +46,38 @@ function ListTableRow(props) {
           }
          })
         .then( res => {
-          // let thisUser = res.data.filter( user => user.id === localId )
-          console.log("upvote data", res)
           setUpvotes(res.data.upvotes);
-
       })
         .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
-
          })
          .catch(err => console.log("UPVOTE FAIL", err))
   }
+  let downvoteHandler = () => {
+    console.log("User Id",props.issue.user_id)
+    console.log("Issue Id",props.issue.id)
+    console.log("token",token)
+    axios
+    .delete(`https://co-make.herokuapp.com/upvotes/${props.issue.id}/issue`,
+    {
+        headers: {
+          authorization: token
+        }
+      })
+       .then(res => {
+         console.log("DOWNVOTE SUCCESS", res)
+         axios
+      .get(`https://co-make.herokuapp.com/upvotes/issue/${props.issue.id}`, {
+        headers: {
+          Authorization: token
+        }
+       })
+      .then( res => {
+        setUpvotes(res.data.upvotes);
+    })
+      .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
+       })
+       .catch(err => console.log("DOWNVOTE FAIL", err))
+}
 
     return (
       <Table.Row>
@@ -73,11 +95,11 @@ function ListTableRow(props) {
         </Table.Cell>
         <Table.Cell>
             <UpvoteCount>
+                <Icon className="arrow circle up large" onClick={ upvoteHandler} />
+                <Icon className="arrow circle down large" onClick={ downvoteHandler} />
+                {upvotes} upvotes
+            </UpvoteCount>
 
-                <Icon className="arrow circle up" 
-                      onClick={ upvoteHandler } />
-                      {upvotes} upvotes
-            </UpvoteCount> 
 
         </Table.Cell>
       </Table.Row>

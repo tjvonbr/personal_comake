@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
+import { Button, Form, Grid, Header, Image, Message, Segment, Dimmer, Loader } from 'semantic-ui-react'
+import '../styles/addIssue.css'
+import Upgrade from '../images/bermuda/bermuda-upgrade.png'
 
 function AddIssue(props) {
-  const [createIssue, setCreateIssue] = useState({ zipCode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id") });
+  const [createIssue, setCreateIssue] = useState({ zipCode: localStorage.getItem("zipcode"), user_id: localStorage.getItem("id"), category: "" });
+  const [isLoading, setIsLoading] = useState(false)
 
   // Functionality for Post Request
   const addIssue = data => {
@@ -19,8 +22,9 @@ function AddIssue(props) {
         .then( res => {
           // let thisUser = res.data.filter( user => user.id === localId )
           console.log("SUCCESS", res.data)
-          props.history.push('/')
 
+          props.history.push('/')
+          setIsLoading(false);
       })
         .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
   }
@@ -37,6 +41,7 @@ function AddIssue(props) {
   };
 
   function handleSubmit(event) {
+    setIsLoading(true);
     event.preventDefault();
     console.log("createIssue", createIssue);
     addIssue(createIssue);
@@ -44,70 +49,71 @@ function AddIssue(props) {
   };
 
   return (
-    <FormWrapper>
-      <form className="form" onSubmit={handleSubmit}>
-        <fieldset>
-          <div className="signup-header">
-            <legend>Create Issue</legend>
-          </div>
-            <div className="form-group row">
-              <label htmlFor="name" className="column-sm-2 col-form-label">
-                Project Title
-                <div className="col-sm-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="issue_name"
-                    placeholder="Add a title"
-                    value={createIssue.issue_name}
-                    onChange={handleChange}
-                  />
-                </div>
-              </label>
-            </div>
-            <div className="form-group">
-              <label htmlFor="email" className="column-sm-2 col-form-label">
-                Category
-                <div className="col-sm-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="category"
-                    placeholder="Add relevant tags"
-                    value={createIssue.category}
-                    onChange={handleChange}
-                  />
-                </div>
-              </label>
-            </div>
-            <div className="form-group">
-              <label htmlFor="role" className="column-sm-2 col-form-label">
-                Description
-                <div className="col-sm-10">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="description"
-                    placeholder="Please add a description"
-                    value={createIssue.description}
-                    onChange={handleChange}
-                  />
-                </div>
-              </label>
-            </div>
-              <button type="submit" className="btn btn-post">
-                Submit
-              </button>
-          </fieldset>
-        </form>
-      </FormWrapper>
-  ) 
+    <>
+    <Dimmer active={ isLoading ? true : false }>
+        <Loader>Loading</Loader>
+      </Dimmer>
+    <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid.Column style={{ maxWidth: 450 }}>
+          <Image src={Upgrade} centered size="small" />
+        <Header as='h2' textAlign='center'>
+          Add a new Issue
+        </Header>
+        <Form size='large' onSubmit={handleSubmit}>
+          <Segment stacked>
+            <Form.Input
+            fluid
+            icon='flag'
+            name="issue_name"
+            value={createIssue.issue_name}
+            onChange={handleChange}
+            iconPosition='left'
+            placeholder='Issue Name'
+            />
+
+            <Form.Input
+              fluid
+              icon='address card'
+              iconPosition='left'
+              placeholder='Description'
+              type='text'
+              name="description"
+              value={createIssue.description}
+              onChange={handleChange}
+            />
+            <Form.Input
+              fluid
+              icon='image'
+              iconPosition='left'
+              placeholder='Picture'
+              type='text'
+              name="picture"
+              value={createIssue.picture}
+              onChange={handleChange}
+            />
+
+            <Button type="submit" color='facebook' fluid size='large'>
+              Add
+            </Button>
+          </Segment>
+        </Form>
+        <Message>
+            Cancel?
+            <Button className="register-button"
+            onClick={()=> props.history.push('/')}
+            content='Go Back'
+            positive
+            size='medium' />
+          </Message>
+      </Grid.Column>
+    </Grid>
+</>
+
+  )
+
+
 }
 
 export default AddIssue;
 
-const FormWrapper = styled.div`
-  max-width: 1024px;
-  width: 100%;
-  margin: 0 auto;
-`
+

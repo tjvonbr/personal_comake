@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment, Dimmer, Loader } from 'semantic-ui-react'
 import axios from 'axios';
-import Logo from '../images/logo.png'
+import Success from '../images/bermuda/bermuda-success.png'
 
 
 function Register(props) {
@@ -39,8 +39,8 @@ function Register(props) {
       </Dimmer>
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
+          <Image src={Success} centered size='small' />
         <Header as='h2' color='teal' textAlign='center'>
-          {/* <Image src={Logo} />  */}
           Create a new account
         </Header>
         <Header as="h4" color='green' textAlign='center'>{props.message}</Header>
