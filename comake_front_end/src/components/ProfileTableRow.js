@@ -1,12 +1,15 @@
-import React from 'react';
+
 import { Table, Header, Image, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
+import React, {useState, useEffect} from 'react';
+
 
 // const Row = styled.div`
 // width: 100px;
 // `
 
 function ProfileTableRow(props) {
+
     return (
       <Table.Row>
         <Table.Cell>

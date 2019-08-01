@@ -5,12 +5,12 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import AddIssue from './components/AddIssue';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Link } from 'react-router-dom';
 import {useLocalStorage} from './hooks/useLocalStorage';
 import styled from 'styled-components';
 
 
-function App() {
+function App(props) {
 
   const [token, setToken] = useLocalStorage('token', '')
   const [localId, setLocalId] = useLocalStorage('id', '')
@@ -29,6 +29,12 @@ function App() {
   font-size: 1.2rem;
   font-weight: bold;
   `
+  const logOut = () => {
+    localStorage.removeItem('zipcode');
+    localStorage.removeItem('id');
+    localStorage.removeItem('token');
+    // return <Redirect to="/login" />
+  }
 
   // const Logo = styled.img`
 
@@ -46,7 +52,7 @@ function App() {
           <div className ='LogoText'><img className='logo' src={Logo}></img><h1>omake</h1></div>          
           <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Home</a>
           <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>About Us</a>
-          <button>Logout</button>
+          <Link to="/login"><button onClick={logOut}>Logout</button></Link>
         </Nav>
       </header>
 

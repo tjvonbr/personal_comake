@@ -4,7 +4,7 @@ import axios from 'axios';
 function EditProfile(props) {
     const [input, setInput] = useState({
         email: props.currentUser.email,
-        image: props.currentUser.image,
+        picture: props.currentUser.picture,
         zipCode: props.currentUser.zipCode,
         username: props.currentUser.username,
         password: props.currentUser.password
@@ -60,12 +60,12 @@ function EditProfile(props) {
                   onChange={handleInput}
                 />
               </label>
-              <label htmlFor="image">
+              <label htmlFor="picture">
                 Image:{" "}
                 <input
                   type="text"
-                  value={input.image}
-                  name="image"
+                  value={input.picture}
+                  name="picture"
                   onChange={handleInput}
                 />
               </label>
