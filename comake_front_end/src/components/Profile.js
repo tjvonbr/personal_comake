@@ -62,6 +62,7 @@ function Profile(props) {
               }
             })
             .then( res => {
+
               axios.get(`https://co-make.herokuapp.com/users/${localId}/issues`, {
                 headers: {
                   Authorization: token
@@ -104,7 +105,7 @@ function Profile(props) {
         : (
           <Body>
         <i class="pencil alternate icon" onClick={handleEdit}></i>
-        <Card className='card' header={currentUser.username} image='https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' meta={currentUser.zipCode} description={currentUser.email} />
+        <Card className='card' header={currentUser.username} image={currentUser.picture} meta={currentUser.zipCode} description={currentUser.email} />
         <ProfileTable currentUser={currentUser} handleEditIssue={handleEditIssue} deleteIssue={deleteIssue} />
 
       <Modal header={'Profile'} image={currentUser.image} description={handleEdit} deny={'Close'} positive={'Submit'}/>

@@ -1,12 +1,30 @@
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
+import axios from 'axios'
 
 function ListCard(props) {
   const [count, setCount] = useState(0);
+  let token = JSON.parse(localStorage.getItem('token'))
+  useEffect(() => {
+    axios
+      .get(`https://co-make.herokuapp.com/upvotes/issue/${props.data.id}`, {
+        headers: {
+          Authorization: token
+        }
+       })
+      .then( res => {
+        // let thisUser = res.data.filter( user => user.id === localId )
+        console.log("upvote data", res)
+
+
+    })
+      .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
+  },[])
 
   return (
+
     <ListCardWrapper>
       <IssueWrapper>
 
@@ -22,7 +40,7 @@ function ListCard(props) {
           </UpvoteCount>
         </ProjectDescription>
       </IssueWrapper>
-      
+
 
     </ListCardWrapper>
   )
