@@ -24,7 +24,6 @@ width: 500px;
 `
 
 
-
 function Profile(props) {
     const [currentUser, setCurrentUser] = useState("")
     const [isEditingUser, setIsEditingUser] = useState(false);
@@ -105,14 +104,13 @@ function Profile(props) {
           />
         )
         : (
-          <Body>
-        <i class="pencil alternate icon" onClick={handleEdit}></i>
+          <Body>        
 
         <ProfileCard className='' currentUser={currentUser} dog={handleEdit} image='' />
 
         <ProfileTable currentUser={currentUser} handleEditIssue={handleEditIssue} deleteIssue={deleteIssue} />
 
-      <Modal header={'Profile'} image={currentUser.image} description={handleEdit} deny={'Close'} positive={'Submit'}/>
+      {/* <Modal header={'Profile'} image={currentUser.image} description={handleEdit} deny={'Close'} positive={'Submit'}/> */}
           </Body>
         )
         }
