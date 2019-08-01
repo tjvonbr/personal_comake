@@ -23,10 +23,19 @@ function App() {
   align-items: center;
   background-color: #5477BB;
   font-family: 'helvetica', sans serif;
-  a {color:#FFFF;}
+  a {color:#FFFF;};
   height: 90px;
+  margin-bottom: 30px;
   font-size: 1.2rem;
   font-weight: bold;
+  `
+
+  // const Logo = styled.img`
+
+  // `
+
+  const LogoText = styled.h1`
+  &&& {color:#FFFF;}
   `
 
   return (
@@ -34,7 +43,7 @@ function App() {
 
       <header className="App-header">
       <Nav>
-          {/* <img src={Logo} /> */}
+          <div className ='LogoText'><img className='logo' src={Logo}></img><h1>omake</h1></div>          
           <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Home</a>
           <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>About Us</a>
           <button>Logout</button>

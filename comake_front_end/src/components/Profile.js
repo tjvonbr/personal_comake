@@ -6,6 +6,7 @@ import { Card, Icon, Image, Table, Modal } from 'semantic-ui-react';
 import EditIssue from './EditIssue';
 import styled from 'styled-components';
 import ProfileTable from './ProfileTable';
+import ProfileCard from './ProfileCard';
 
 
 const Container = styled.div`
@@ -17,11 +18,12 @@ const Body = styled.div`
 flex-direction: column;
 
 `
-// const Nav = styled.nav`
-// background-color: #99AAE7;
-// font-family: "helvetica", sans serif;
-// a {color:#FFFF;}
-// `
+
+const PCard = styled.div`
+width: 500px;
+`
+
+
 
 function Profile(props) {
     const [currentUser, setCurrentUser] = useState("")
@@ -104,7 +106,7 @@ function Profile(props) {
         : (
           <Body>
         <i class="pencil alternate icon" onClick={handleEdit}></i>
-        <Card className='card' header={currentUser.username} image='https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500' meta={currentUser.zipCode} description={currentUser.email} />
+        <ProfileCard className='' currentUser={currentUser} dog={handleEdit} image='' />
         <ProfileTable currentUser={currentUser} handleEditIssue={handleEditIssue} deleteIssue={deleteIssue} />
 
       <Modal header={'Profile'} image={currentUser.image} description={handleEdit} deny={'Close'} positive={'Submit'}/>
