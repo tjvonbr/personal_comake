@@ -15,7 +15,7 @@ function ProfileTable(props) {
 
     <Table.Body>
     { !props.currentUser.issues ? <p>Loading...</p>
-        : props.issues.map( issue =>
+        : props.currentUser.issues.map( issue =>
           <ProfileTableRow issue={issue} handleEditIssue={props.handleEditIssue} deleteIssue={props.deleteIssue} />
         )}
     </Table.Body>

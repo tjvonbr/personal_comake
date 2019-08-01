@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Table, Header, Image } from 'semantic-ui-react';
 
 
 
 function ProfileTableRow(props) {
+
     return (
       <Table.Row>
         <Table.Cell>
