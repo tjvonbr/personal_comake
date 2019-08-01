@@ -25,10 +25,10 @@ function ProfileTableRow(props) {
          {/* upvote placeholder   */}
          <span className= 'iconstyle'>
         <i className="pencil alternate icon" onClick={()=> props.handleEditIssue(props.issue.id)}></i>
-        {' '}   
-       
+        {' '}
+
         <i className="trash alternate outline icon" onClick={()=> props.deleteIssue(props.issue.id)}></i>
-        </span>        
+        </span>
         </Table.Cell>
       </Table.Row>
       )
