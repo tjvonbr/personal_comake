@@ -89,9 +89,9 @@ function EditProfile(props) {
               </label>
             </div>
 
-            <button>Update User</button>
+            <button>Update</button>
           </form>
-          <button onClick={props.handleEdit}>go back</button>
+          <button onClick={props.handleEdit}>Back</button>
         </div>
         </div>
     )

@@ -96,7 +96,7 @@ function EditIssue(props) {
 
             <button>Update User</button>
           </form>
-          <button onClick={()=>props.setIsEditingIssue(!props.isEditingIssue)}>go back</button>
+          <button onClick={()=>props.setIsEditingIssue(!props.isEditingIssue)}>Back</button>
         </div>
         </div>
     )
