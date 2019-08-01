@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Table, Header, Image, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 
-
 function ListTableRow(props) {
     const [count, setCount] = useState(0);
     
@@ -19,16 +18,16 @@ function ListTableRow(props) {
         </Table.Cell>
         <Table.Cell>
             <UpvoteCount>
-                <Icon name="arrow up" onClick={ () => setCount(count + 1)} />
+                <Icon className="arrow circle up" onClick={ () => setCount(count + 1)} />
                 {count} upvotes
-                </UpvoteCount> 
+            </UpvoteCount> 
         </Table.Cell>
       </Table.Row>
       )
 }
 
 const UpvoteCount = styled.span`
-  padding-top: 30px;
+  padding: 0;
 `
 
 export default ListTableRow;

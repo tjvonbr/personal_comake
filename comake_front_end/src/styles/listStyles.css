@@ -1,0 +1,9 @@
+.user-address {
+  text-align: center;
+}
+
+.ui.button {
+  background-color:rgba(242, 198, 23, 0.2);
+  color: #eb472c;
+  height: 50px;
+}
