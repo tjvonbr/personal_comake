@@ -32,6 +32,7 @@ function App(props) {
   const logOut = () => {
     localStorage.removeItem('zipcode');
     localStorage.removeItem('id');
+    setToken('')
     localStorage.removeItem('token');
     // return <Redirect to="/login" />
   }
@@ -49,10 +50,11 @@ function App(props) {
 
       <header className="App-header">
       <Nav>
-          <div className ='LogoText'><img className='logo' src={Logo}></img><h1>omake</h1></div>          
+          <div className ='LogoText'><img className='logo' src={Logo}></img><h1>omake</h1></div>
           <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Home</a>
           <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>About Us</a>
-          <Link to="/login"><button onClick={logOut}>Logout</button></Link>
+          {token ? <Link to="/login"><button onClick={logOut}>Logout</button></Link> : token === "" ? <></> : <></> }
+
         </Nav>
       </header>
 

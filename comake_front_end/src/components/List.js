@@ -10,9 +10,9 @@ import styles from '../styles/listStyles.css';
 
 function List(props) {
   const [issues, setIssues] = useState([]);
+  const [currentUser, setCurrentUser] = useState({})
   let localId = JSON.parse(localStorage.getItem('id'))
   let token = JSON.parse(localStorage.getItem('token'))
-
   useEffect(() => {
       axios
         .get('https://co-make.herokuapp.com/issues', {
@@ -21,10 +21,18 @@ function List(props) {
           }
          })
         .then( res => {
-          // axios.get('')
-          // let thisUser = res.data.filter( user => user.id === localId )
-          console.log(res.data)
           setIssues(res.data);
+          axios
+           .get(`https://co-make.herokuapp.com/users/${localId}/issues`, {
+              headers: {
+                Authorization: token
+              }
+             })
+            .then( res => {
+            console.log("USER DATA FROM SERVER", res)
+            setCurrentUser(res.data)
+          })
+            .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
 
       })
         .catch( err => console.log("OH NO AN ERROR HAPPENED", err))
@@ -33,8 +41,8 @@ function List(props) {
   return (
     <ListWrapper>
       <UserWrapper>
-        <UserInfo className="user-header">Robert Downey</UserInfo>
-        <UserAddress className="user-address">Enter zipcode here</UserAddress>
+        <UserInfo className="user-header">{currentUser.username}</UserInfo>
+        <UserAddress className="user-address">{currentUser.zipCode}</UserAddress>
         <LocationWrapper>
             <LocationInfo></LocationInfo>
             <LocationInfo>Filter</LocationInfo>

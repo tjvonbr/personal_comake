@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment, Dimmer, Loader } from 'semantic-ui-react'
 import axios from 'axios';
 import Logo from '../images/logo.png'
 
 
 function Register(props) {
   const [inputData, setInputData] = useState({email: "", password:"", username:"", zipCode:""})
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInput = e => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
@@ -13,6 +14,7 @@ function Register(props) {
 
   const loginHandler = e => {
     e.preventDefault()
+    setIsLoading(true)
     const url =
         "https://co-make.herokuapp.com/auth/register";
       axios
@@ -22,6 +24,7 @@ function Register(props) {
           props.setMessage("Successfully Registered!")
           console.log("Success!", res)
           props.history.push("/");
+          setIsLoading(false);
         })
 
         .catch(err => {
@@ -30,11 +33,15 @@ function Register(props) {
   }
 
   return (
-
+    <>
+    <Dimmer active={ isLoading ? true : false }>
+        <Loader>Loading</Loader>
+      </Dimmer>
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' color='teal' textAlign='center'>
-          <Image src={Logo} /> Create a new account
+          {/* <Image src={Logo} />  */}
+          Create a new account
         </Header>
         <Header as="h4" color='green' textAlign='center'>{props.message}</Header>
         <Form size='large' onSubmit={loginHandler}>
@@ -95,6 +102,7 @@ function Register(props) {
         </Message>
       </Grid.Column>
     </Grid>
+    </>
   )
 }
 
