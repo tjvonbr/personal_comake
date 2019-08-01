@@ -8,8 +8,8 @@ import AddIssue from './components/AddIssue';
 import { Route, Redirect, Link } from 'react-router-dom';
 import {useLocalStorage} from './hooks/useLocalStorage';
 import styled from 'styled-components';
-
-//import styles from '../styles/ProfileStyles.css'
+import styles from './styles/ProfileStyles.css'
+import { Button } from 'semantic-ui-react';
 
 
 function App(props) {
@@ -47,11 +47,10 @@ function App(props) {
 
       <header className="App-header">
       <Nav>
-
-          <div className ='logoText'><img className='logo' src={Logo}></img><h1>omake</h1></div>
+          <div className ='logotext'><img className='logo' src={Logo}></img>omake</div>
           <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Home</a>
           <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>About Us</a>
-          {token ? <Link to="/login"><button onClick={logOut}>Logout</button></Link> : token === "" ? <></> : <></> }
+          {token ? <Link to="/login"><Button color='facebook' size='medium' onClick={logOut}>Logout</Button></Link> : token === "" ? <></> : <></> }
         </Nav>
       </header>
 

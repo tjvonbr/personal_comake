@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Header, Image } from 'semantic-ui-react';
 import ProfileTableRow from './ProfileTableRow';
-import styles from '../ProfileStyles.css';
+import styles from '../styles/ProfileStyles.css';
 
 // const PTable = styled.table` 
 //     width: 400px;
@@ -16,7 +16,7 @@ function ProfileTable(props) {
     <Table className='tablestyle' basic='very' celled collapsing>
     <Table.Header>
       <Table.Row>
-        <Table.HeaderCell>Issue</Table.HeaderCell>
+        <Table.HeaderCell>Issues</Table.HeaderCell>
         <Table.HeaderCell>Edit</Table.HeaderCell>
       </Table.Row>
     </Table.Header>

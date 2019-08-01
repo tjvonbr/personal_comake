@@ -89,6 +89,7 @@ function AddIssue(props) {
                     className="form-control"
                     name="description"
                     placeholder="Please add a description"
+                    maxLength={100}
                     value={createIssue.description}
                     onChange={handleChange}
                   />

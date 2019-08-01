@@ -7,6 +7,7 @@ import EditIssue from './EditIssue';
 import styled from 'styled-components';
 import ProfileTable from './ProfileTable';
 import ProfileCard from './ProfileCard';
+import ProfileEditForm from './ProfileEditForm';
 
 
 const Container = styled.div`
@@ -106,12 +107,39 @@ function Profile(props) {
         : (
           <Body>        
 
-        <ProfileCard className='' currentUser={currentUser} dog={handleEdit} image='' />
+        <ProfileCard currentUser={currentUser} dog={handleEdit} image={currentUser.picture} />
 
         <ProfileTable currentUser={currentUser} handleEditIssue={handleEditIssue} deleteIssue={deleteIssue} />
 
-      {/* <Modal header={'Profile'} image={currentUser.image} description={handleEdit} deny={'Close'} positive={'Submit'}/> */}
+        <Modal currentUser={currentUser} />
           </Body>
+
+        //   <footer className="footer-nav">
+        //   <Nav>
+        //     {/* <img src={Logo} /> */}
+        //     {/* <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Feed</a>
+        //     <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>Create an Issue</a>
+        //     <a href="#">Profile</a> */}
+        //     <Button.Group widths="3" size="big">
+        //       {/* <Link to="#"> */}
+        //         <Button icon="list alternate outline"
+        //                 content='Feed'
+        //         />
+        //       {/* </Link> */}
+        //       {/* <Link to="/addIssue"> */}
+        //         <Button icon="add" 
+        //                 content='Create Issue'
+        //         />
+        //       {/* </Link> */}
+        //       {/* <Link to="/profile/:id"> */}
+        //         <Button icon="user" 
+        //                 content='Profile'
+        //         />
+        //       {/* </Link> */}
+        //     </Button.Group>
+        //   </Nav>
+        // </footer>
+
         )
         }
        </Container>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import axios from 'axios';
+import { Button, Checkbox, Form } from 'semantic-ui-react';
 
 function EditProfile(props) {
     const [input, setInput] = useState({
@@ -49,10 +50,10 @@ function EditProfile(props) {
         <div>
           <div>
           <h1>Edit</h1>
-          <form onSubmit={updateHandler}>
+          {/* <form onSubmit={updateHandler}>
             <div>
               <label htmlFor="username">
-                Name:{" "}
+                Username:{" "}
                 <input
                   type="text"
                   value={input.username}
@@ -79,7 +80,7 @@ function EditProfile(props) {
                 />
               </label>
               <label htmlFor="location">
-                Location:{" "}
+                Zip Code:{" "}
                 <input
                   type="text"
                   value={input.zipCode}
@@ -90,8 +91,28 @@ function EditProfile(props) {
             </div>
 
             <button>Update</button>
-          </form>
-          <button onClick={props.handleEdit}>Back</button>
+          </form> */}
+          <Form onSubmit={updateHandler} className='formstyle'>
+    <Form.Field>
+      <label>Username</label>
+      <input type='text' value={input.username} name='username' onChange={handleInput} placeholder='Username' />
+    </Form.Field>
+    <Form.Field>
+      <label>Profile Picture</label>
+      <input type='text' value={input.picture} name='picture' onChange={handleInput} placeholder='Profile Picture' />
+    </Form.Field>
+    <Form.Field>
+      <label>Email</label>
+      <input type='text' value={input.email} name='email' onChange={handleInput} placeholder='Email' />
+    </Form.Field>
+    <Form.Field>
+      <label>Zip Code</label>
+      <input type='text' value={input.zipCode} name='zip code' onChange={handleInput} placeholder='Zip Code' />
+    </Form.Field>
+    <Button type='submit'>Submit</Button>
+    <Button onClick={props.handleEdit}>Back</Button>
+  </Form>
+          {/* <button onClick={props.handleEdit}>Back</button> */}
         </div>
         </div>
     )
