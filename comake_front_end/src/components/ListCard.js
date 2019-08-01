@@ -17,8 +17,8 @@ function ListCard(props) {
           <address>Location:  {props.data.zipCode}</address>
           <p>Description:  {props.data.description}</p>
           <UpvoteCount>
-            <Icon name="arrow up" />
-            <button className="upvote-btn" onClick={ () => setCount(count + 1)}>{count} upvotes</button>
+            <Icon name="arrow up" onClick={ () => setCount(count + 1)} />
+            {count} upvotes
           </UpvoteCount>
         </ProjectDescription>
       </IssueWrapper>
@@ -38,9 +38,10 @@ const IssueWrapper = styled.div`
   justify-content: space-around;
 `
 
-
 const ProjectImage = styled.img`
   text-align: center;
+  height: 175px;
+  width: 175px;
 `
 
 const ProjectDescription = styled.div`
@@ -57,7 +58,7 @@ const ProjectLocation = styled.address`
   margin: 0px;
 `
 
-const UpvoteCount = styled.div`
+const UpvoteCount = styled.span`
   margin-left: 200px;
   padding-top: 30px;
 `

@@ -3,10 +3,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 import ListCard from './ListCard';
 import FooterNav from './FooterNav';
-import image from '../images/bermuda/bermuda-welcome.png';
+import ListTable from './ListTable';
 
 function List(props) {
-  const [currentUser, setCurrentUser] = useState({});
   const [issues, setIssues] = useState([]);
   let localId = JSON.parse(localStorage.getItem('id'))
   let token = JSON.parse(localStorage.getItem('token'))
@@ -19,6 +18,7 @@ function List(props) {
           }
          })
         .then( res => {
+          // axios.get('')
           // let thisUser = res.data.filter( user => user.id === localId )
           console.log(res.data)
           setIssues(res.data);
@@ -31,7 +31,6 @@ function List(props) {
     <ListWrapper>
       <UserWrapper>
         <UserInfo>Robert Downey</UserInfo>
-        <WelcomeImage src={image} alt="Welcome Image"/>
         <UserAddress></UserAddress>
         <LocationWrapper>
             <LocationInfo></LocationInfo>
@@ -39,10 +38,12 @@ function List(props) {
             <LocationInfo>Sort by:</LocationInfo>
         </LocationWrapper>
       </UserWrapper>
-  { issues.map( issue => <ListCard key={issue.id} data={issue}  /> )}
+
+      {/* Issues List */}
+      <ListTable issues={issues}/>
 
     <div className="footer-wrapper">
-      <FooterNav />
+      {/* <FooterNav /> */}
     </div>
 
     </ListWrapper>

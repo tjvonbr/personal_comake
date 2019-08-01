@@ -37,7 +37,7 @@ function App() {
           {/* <img src={Logo} /> */}
           <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Home</a>
           <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>About Us</a>
-          <button>Logout</button>
+          <a href="#">Logout</a>
         </Nav>
       </header>
 
