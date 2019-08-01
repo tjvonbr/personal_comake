@@ -1,0 +1,36 @@
+.logout {
+    background-color: #4e73b9;
+    border: 2px solid #ffffff;
+    padding: 1.5rem 3rem;
+    color: #ffffff;
+    font-family: arial;
+    font-size: 1.2rem;
+    border-radius: 1.5rem;
+    cursor: pointer;
+}
+
+
+.logotext {
+color: white;
+font-size: 3.5rem;
+font-weight: bold;
+}
+
+.imagestyle {
+    border-radius: 50% !important;
+}
+
+.cardstyle {
+    width: 500px !important;
+}
+
+.tablestyle {
+    width: 500px !important;
+    font-size: 1.5rem !important;
+}
+
+.iconcell {      
+    padding-right: 30px;
+
+    
+}

@@ -8,7 +8,9 @@ import AddIssue from './components/AddIssue';
 import { Route, Redirect, Link } from 'react-router-dom';
 import {useLocalStorage} from './hooks/useLocalStorage';
 import styled from 'styled-components';
-import './App.css';
+
+//import styles from '../styles/ProfileStyles.css'
+
 
 function App(props) {
 
@@ -37,24 +39,19 @@ function App(props) {
     // return <Redirect to="/login" />
   }
 
-  // const Logo = styled.img`
+ 
 
-  // `
-
-  const LogoText = styled.h1`
-  &&& {color:#FFFF;}
-  `
 
   return (
     <div className="App">
 
       <header className="App-header">
       <Nav>
-          <div className ='LogoText'><img className='logo' src={Logo}></img><h1>omake</h1></div>
+
+          <div className ='logoText'><img className='logo' src={Logo}></img><h1>omake</h1></div>
           <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Home</a>
           <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>About Us</a>
           {token ? <Link to="/login"><button onClick={logOut}>Logout</button></Link> : token === "" ? <></> : <></> }
-
         </Nav>
       </header>
 
