@@ -1,9 +1,8 @@
 import React from 'react';
 import { Table, Header, Image } from 'semantic-ui-react';
-import ProfileTableRow from './ProfileTableRow';
+import ListTableRow from './ListTableRow';
 
-
-function ProfileTable(props) {
+function ListTable(props) {
     return (
     <Table basic='very' celled collapsing>
     <Table.Header>
@@ -14,14 +13,14 @@ function ProfileTable(props) {
     </Table.Header>
 
     <Table.Body>
-    { !props.currentUser.issues ? <p>Loading...</p>
-        : props.issues.map( issue =>
-          <ProfileTableRow issue={issue} handleEditIssue={props.handleEditIssue} deleteIssue={props.deleteIssue} />
+    {/* { issues.map( issue => <ListCard key={issue.id} data={issue}  /> )}     */}
+    { props.issues &&  props.issues.map( issue =>
+          <ListTableRow issue={issue} />
         )}
     </Table.Body>
     </Table>
       )
 }
 
-export default ProfileTable;
+export default ListTable;
 
