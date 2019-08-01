@@ -59,9 +59,21 @@ function List(props) {
           <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>Create an Issue</a>
           <a href="#">Profile</a> */}
           <Button.Group widths="3" size="big">
-            <Button icon="list alternate outline" content='Feed' />
-            <Button icon="add" content='Create Issue' />
-            <Button icon="user" content='Profile' />
+            {/* <Link to="#"> */}
+              <Button icon="list alternate outline"
+                      content='Feed'
+              />
+            {/* </Link> */}
+            {/* <Link to="/addIssue"> */}
+              <Button icon="add" 
+                      content='Create Issue'
+              />
+            {/* </Link> */}
+            {/* <Link to="/profile/:id"> */}
+              <Button icon="user" 
+                      content='Profile'
+              />
+            {/* </Link> */}
           </Button.Group>
         </Nav>
       </footer>
