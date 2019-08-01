@@ -14,7 +14,7 @@ function ProfileTableRow(props) {
       <Table.Row>
         <Table.Cell>
           <Header as='h4' image>
-            <Image src={props.issue.picture} rounded size='large' />
+            <Image src={props.issue.picture} rounded size='massive' />
             <Header.Content>
               {props.issue.issue_name}
               <Header.Subheader>{props.issue.description}</Header.Subheader>
@@ -24,11 +24,11 @@ function ProfileTableRow(props) {
         <Table.Cell className='iconcell'>
          {/* upvote placeholder   */}
          <span className= 'iconstyle'>
-        <i className="pencil alternate icon pencilmargin" onClick={()=> props.handleEditIssue(props.issue.id)}></i>       
+        <i className="pencil alternate icon" onClick={()=> props.handleEditIssue(props.issue.id)}></i>
+        {' '}   
        
         <i className="trash alternate outline icon" onClick={()=> props.deleteIssue(props.issue.id)}></i>
-        </span>
-        
+        </span>        
         </Table.Cell>
       </Table.Row>
       )
