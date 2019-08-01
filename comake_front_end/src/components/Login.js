@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment, Dimmer, Loader } from 'semantic-ui-react'
 import axios from 'axios';
-import Logo from '../images/logo.png'
+import Welcome from '../images/bermuda/sign-in-4.png'
 
 
 function Login(props) {
   const [inputData, setInputData] = useState({email: "", password:""})
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const handleInput = e => {
     setInputData({ ...inputData, [e.target.name]: e.target.value });
   };
@@ -21,6 +22,7 @@ function Login(props) {
         .then( res => {
 
           props.setMessage('')
+          setErrorMessage('')
           console.log("Success!", res)
           props.setToken(res.data.token)
           props.setLocalId(res.data.id)
@@ -31,6 +33,8 @@ function Login(props) {
 
         .catch(err => {
           console.log("Login PROBLEM0", err);
+          setErrorMessage("Uh Oh, Looks like that didn't work. Try Again!")
+          setIsLoading(false)
         });
   }
 
@@ -43,12 +47,13 @@ function Login(props) {
 
         <Grid.Column style={{ maxWidth: 450 }}>
 
+          <Image src={Welcome} centered size='medium' />
           <Header as='h2' color='teal' textAlign='center'>
-            {/* <Image src={Logo} size='big' /> */}
-             Log-in to your account
+
+             Log in to your account
           </Header>
           <Header as="h4" color='green' textAlign='center'>{props.message}</Header>
-
+          <Header as="h4" color='red' textAlign='center'>{errorMessage}</Header>
           <Form size='large' onSubmit={loginHandler}>
             <Segment stacked>
               <Form.Input
@@ -72,7 +77,7 @@ function Login(props) {
               />
 
               <Button type="submit" color='facebook' fluid size='large'>
-                Login
+                Log in
               </Button>
             </Segment>
           </Form>
