@@ -6,6 +6,8 @@ import axios from 'axios';
 function ListTableRow(props) {
     const [count, setCount] = useState(0);
     const [upvotes, setUpvotes] = useState(0)
+    const [upvoteId, setUpvoteId] = useState(null)
+    let localId = JSON.parse(localStorage.getItem('id'))
     let token = JSON.parse(localStorage.getItem('token'))
     useEffect(() => {
       axios
@@ -30,7 +32,7 @@ function ListTableRow(props) {
       axios
       .post('https://co-make.herokuapp.com/upvotes/issue',
       {
-        user_id:  props.issue.user_id,
+        user_id:  localId,
         issue_id: props.issue.id
       },{
           headers: {
@@ -39,6 +41,7 @@ function ListTableRow(props) {
         })
          .then(res => {
            console.log("UPVOTE SUCCESS", res)
+           setUpvoteId(res.data.id)
            axios
         .get(`https://co-make.herokuapp.com/upvotes/issue/${props.issue.id}`, {
           headers: {
@@ -90,16 +93,13 @@ function ListTableRow(props) {
             </Header.Content>
           </Header>
         </Table.Cell>
-        <Table.Cell textAlign="center">
-          Category
-        </Table.Cell>
         <Table.Cell>
             <UpvoteCount>
+
                 <Icon className="arrow circle up large" onClick={ upvoteHandler} />
                 <Icon className="arrow circle down large" onClick={ downvoteHandler} />
                 {upvotes} upvotes
             </UpvoteCount>
-
 
         </Table.Cell>
       </Table.Row>
