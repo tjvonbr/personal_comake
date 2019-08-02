@@ -2,12 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import EditProfile from './EditProfile';
-import { Card, Icon, Image, Table, Modal } from 'semantic-ui-react';
+import { Button, Card, Icon, Image, Table } from 'semantic-ui-react';
 import EditIssue from './EditIssue';
 import styled from 'styled-components';
 import ProfileTable from './ProfileTable';
 import ProfileCard from './ProfileCard';
 import ProfileEditForm from './ProfileEditForm';
+import styles from '../styles/listStyles.css';
 
 
 const Container = styled.div`
@@ -23,7 +24,18 @@ flex-direction: column;
 const PCard = styled.div`
 width: 500px;
 `
-
+const Nav = styled.nav`
+display: flex;
+border: none;
+justify-content: space-evenly;
+align-items: center;
+font-family: 'helvetica', sans serif;
+a {color:#eb472c;};
+  {textDecoration: none}
+height: 50px;
+font-size: 1.2rem;
+font-weight: bold;
+`
 
 function Profile(props) {
     const [currentUser, setCurrentUser] = useState("")
@@ -111,34 +123,29 @@ function Profile(props) {
 
         <ProfileTable currentUser={currentUser} handleEditIssue={handleEditIssue} deleteIssue={deleteIssue} />
 
-        <Modal currentUser={currentUser} />
+        <footer className="footer-nav">
+          <Nav className="bottom-nav">
+    
+            <Button.Group widths="3" size="big">
+              <Button icon="list alternate outline"
+                      content='Feed'
+                      onClick={() => props.history.push("/")}
+              />
+              <Button icon="add" 
+                      content='Create Issue'
+                      onClick={() => props.history.push("/addIssue")}
+              />
+              <Button icon="user" 
+                      content='Profile'
+                      onClick={() => props.history.push(`/profile/${localId}`)}
+              />
+            </Button.Group>
+          </Nav>
+        </footer>
           </Body>
 
-        //   <footer className="footer-nav">
-        //   <Nav>
-        //     {/* <img src={Logo} /> */}
-        //     {/* <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Feed</a>
-        //     <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>Create an Issue</a>
-        //     <a href="#">Profile</a> */}
-        //     <Button.Group widths="3" size="big">
-        //       {/* <Link to="#"> */}
-        //         <Button icon="list alternate outline"
-        //                 content='Feed'
-        //         />
-        //       {/* </Link> */}
-        //       {/* <Link to="/addIssue"> */}
-        //         <Button icon="add" 
-        //                 content='Create Issue'
-        //         />
-        //       {/* </Link> */}
-        //       {/* <Link to="/profile/:id"> */}
-        //         <Button icon="user" 
-        //                 content='Profile'
-        //         />
-        //       {/* </Link> */}
-        //     </Button.Group>
-        //   </Nav>
-        // </footer>
+          
+       
 
         )
         }
