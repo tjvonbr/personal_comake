@@ -86,7 +86,7 @@ function ListTableRow(props) {
       <Table.Row>
         <Table.Cell>
           <Header as='h4' image>
-            <Image src={props.issue.picture} rounded size='mini' />
+            <Image src={props.issue.picture} circular size='mini' />
             <Header.Content>
               {props.issue.issue_name}
               <Header.Subheader>{props.issue.description}</Header.Subheader>

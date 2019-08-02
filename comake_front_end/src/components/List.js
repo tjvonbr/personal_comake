@@ -52,43 +52,34 @@ function List(props) {
         description={`You have posted ${issuesCreated} times since joining Comake!`}
       />
   
-    <ListWrapper>
-      {/* <UserWrapper>
-        <UserInfo className="user-header">{currentUser.username}</UserInfo>
-        <UserAddress className="user-address">{currentUser.zipCode}</UserAddress>
-        <Image src={currentUser.picture} size='medium' rounded />
-        <LocationWrapper>
-            <LocationInfo></LocationInfo>
-            <LocationInfo>Filter</LocationInfo>
-            <LocationInfo>Sort by:</LocationInfo>
-        </LocationWrapper>
-      </UserWrapper> */}
-
-      {/* Issues List */}
-      <ListTable issues={issues}/>
-      <footer className="footer-nav">
-        <Nav>
-          {/* <img src={Logo} /> */}
-          {/* <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Feed</a>
-          <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>Create an Issue</a>
-          <a href="#">Profile</a> */}
-          <Button.Group widths="3" size="big">
-            <Button icon="list alternate outline"
-                    content='Feed'
-                    onClick={() => props.history.push("#")}
-            />
-            <Button icon="add" 
-                    content='Create Issue'
-                    onClick={() => props.history.push("/addIssue")}
-            />
-            <Button icon="user" 
-                    content='Profile'
-                    onClick={() => props.history.push(`/profile/${localId}`)}
-            />
-          </Button.Group>
-        </Nav>
-      </footer>
-    </ListWrapper>
+      <ListWrapper>
+    
+        {/* Issues List */}
+    
+        <ListTable issues={issues}/>
+    
+        {/* Fixed Footer */}
+        
+        <footer className="footer-nav">
+          <Nav className="bottom-nav">
+    
+            <Button.Group widths="3" size="big">
+              <Button icon="list alternate outline"
+                      content='Feed'
+                      onClick={() => props.history.push("#")}
+              />
+              <Button icon="add" 
+                      content='Create Issue'
+                      onClick={() => props.history.push("/addIssue")}
+              />
+              <Button icon="user" 
+                      content='Profile'
+                      onClick={() => props.history.push(`/profile/${localId}`)}
+              />
+            </Button.Group>
+          </Nav>
+        </footer>
+      </ListWrapper>
     </>
   )
 }
@@ -97,7 +88,7 @@ const ListWrapper = styled.div`
   max-width: 1024px;
   width: 100%;
   margin: 0 auto;
-  border-bottom: 1px solid black;
+
 `
 
 const UserWrapper = styled.div`
