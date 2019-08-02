@@ -46,12 +46,14 @@ function App(props) {
     <div className="App">
 
       <header className="App-header">
+      <nav className='nav-container'>
       <Nav>
           <div className ='logotext'><img className='logo' src={Logo}></img>omake</div>
           <a href='https://flamboyant-mayer-055230.netlify.com/index.html'>Home</a>
           <a href='https://flamboyant-mayer-055230.netlify.com/aboutus.html'>About Us</a>
           {token ? <Link to="/login"><Button color='facebook' size='medium' onClick={logOut}>Logout</Button></Link> : token === "" ? <></> : <></> }
         </Nav>
+        </nav>
       </header>
 
 

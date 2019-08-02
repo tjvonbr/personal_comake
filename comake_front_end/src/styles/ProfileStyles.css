@@ -11,7 +11,13 @@
     font-weight: bold;
 } */
 
-
+.nav-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
 
 .logotext {
 color: white;
@@ -22,6 +28,7 @@ font-weight: bold;
 
 .cardstyle {
     width: 500px !important;
+    margin-top: 120px !important;
 }
 
 .tablestyle {
@@ -29,8 +36,6 @@ font-weight: bold;
     font-size: 1.2rem !important;
 }
 
-.iconcell {      
-}
 
 .formstyle {
     width: 500px !important;

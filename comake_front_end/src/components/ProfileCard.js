@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react';
-import styles from '../styles/ProfileStyles.css';
+import '../styles/ProfileStyles.css';
 
 
 
