@@ -29,8 +29,8 @@ border: none;
 justify-content: space-evenly;
 align-items: center;
 font-family: 'helvetica', sans serif;
-a {color:#eb472c;};
-  {textDecoration: none}
+a {color:#eb472c;
+  text-decoration: none}
 height: 50px;
 font-size: 1.2rem;
 font-weight: bold;
@@ -116,7 +116,7 @@ function Profile(props) {
           />
         )
         : (
-          <Body>        
+          <Body>
 
         <ProfileCard currentUser={currentUser} dog={handleEdit} image={currentUser.picture} />
 
@@ -124,17 +124,17 @@ function Profile(props) {
 
         <footer className="footer-nav">
           <Nav className="bottom-nav">
-    
+
             <Button.Group widths="3" size="big">
               <Button icon="list alternate outline"
                       content='Feed'
                       onClick={() => props.history.push("/")}
               />
-              <Button icon="add" 
+              <Button icon="add"
                       content='Create Issue'
                       onClick={() => props.history.push("/addIssue")}
               />
-              <Button icon="user" 
+              <Button icon="user"
                       content='Profile'
                       onClick={() => props.history.push(`/profile/${localId}`)}
               />
@@ -143,8 +143,8 @@ function Profile(props) {
         </footer>
           </Body>
 
-          
-       
+
+
 
         )
         }
