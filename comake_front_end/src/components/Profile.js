@@ -7,7 +7,6 @@ import EditIssue from './EditIssue';
 import styled from 'styled-components';
 import ProfileTable from './ProfileTable';
 import ProfileCard from './ProfileCard';
-import ProfileEditForm from './ProfileEditForm';
 import styles from '../styles/listStyles.css';
 
 
