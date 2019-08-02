@@ -17,6 +17,7 @@ function ProfileTable(props) {
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell>Issues</Table.HeaderCell>
+        <Table.HeaderCell></Table.HeaderCell>
         <Table.HeaderCell>Edit</Table.HeaderCell>
       </Table.Row>
     </Table.Header>

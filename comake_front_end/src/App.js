@@ -20,6 +20,7 @@ function App(props) {
   const [message, setMessage] = useState('')
 
   const Nav = styled.nav`
+  display: block;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -29,7 +30,8 @@ function App(props) {
   height: 90px;
   margin-bottom: 30px;
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: bold;  
+  width: 100%;  
   `
   const logOut = () => {
     localStorage.removeItem('zipcode');

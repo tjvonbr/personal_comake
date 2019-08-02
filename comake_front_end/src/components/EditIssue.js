@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+import axios from 'axios';
+import { Button, Checkbox, Form } from 'semantic-ui-react';
 
 function EditIssue(props) {
     const [input, setInput] = useState({
@@ -54,7 +55,7 @@ function EditIssue(props) {
         <div>
           <div>
           <h1>Edit</h1>
-          <form onSubmit={updateHandler}>
+          {/* <form onSubmit={updateHandler}>
             <div>
               <label htmlFor="issue_name">
                 Issue Name:{" "}
@@ -96,10 +97,37 @@ function EditIssue(props) {
 
             <button>Update User</button>
           </form>
-          <button onClick={()=>props.setIsEditingIssue(!props.isEditingIssue)}>Back</button>
+          <button onClick={()=>props.setIsEditingIssue(!props.isEditingIssue)}>Back</button> */}
+       
+
+<Form onSubmit={updateHandler} className='formstyle'>
+<Form.Field>
+  <label>Issue</label>
+  <input type='text' value={input.issue_name} name='issue_name' onChange={handleInput} placeholder='Issue' />
+</Form.Field>
+<Form.Field>
+  <label>Picture</label>
+  <input type='text' value={input.picture} name='picture' onChange={handleInput} placeholder='Issue Picture' />
+</Form.Field>
+<Form.Field>
+  <label>Description</label>
+  <input type='text' value={input.description} name='description' onChange={handleInput} placeholder='Issue Description' />
+</Form.Field>
+<Form.Field>
+  <label>Category</label>
+  <input type='text' value={input.category} name='category' onChange={handleInput} placeholder='Category' />
+</Form.Field>
+<Button type='submit'>Update</Button>
+<Button onClick={()=>props.setIsEditingIssue(!props.isEditingIssue)}>Back</Button>
+</Form>
+
+
+</div>
         </div>
-        </div>
-    )
+
+    )    
 }
+
+
 
 export default EditIssue

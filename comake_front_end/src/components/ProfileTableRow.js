@@ -13,15 +13,18 @@ function ProfileTableRow(props) {
     return (
       <Table.Row>
         <Table.Cell>
+        <Image src={props.issue.picture} rounded size='small' />
+        </Table.Cell>
+        <Table.Cell>
           <Header as='h4' image>
-            <Image src={props.issue.picture} rounded size='massive' />
+            
             <Header.Content>
               {props.issue.issue_name}
               <Header.Subheader>{props.issue.description}</Header.Subheader>
             </Header.Content>
           </Header>
         </Table.Cell>
-        <Table.Cell className='iconcell'>
+        <Table.Cell className='iconcell' width={3}>
          {/* upvote placeholder   */}
          <span className= 'iconstyle'>
         <i className="pencil alternate icon" onClick={()=> props.handleEditIssue(props.issue.id)}></i>
