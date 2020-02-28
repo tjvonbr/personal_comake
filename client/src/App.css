@@ -1,0 +1,15 @@
+.App {
+  text-align: center;
+}
+
+
+.register-button {
+  margin-left: 10px!important;
+}
+
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
