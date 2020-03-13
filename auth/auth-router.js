@@ -56,7 +56,7 @@ router.post("/login", validateLogin, (req, res) => {
 const generateToken = user => {
   const payload = {
     id: user.id,
-    email: user.email
+    password: user.password
   };
 
   // Need to change from string to .env variable
