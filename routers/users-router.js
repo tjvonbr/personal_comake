@@ -7,7 +7,8 @@ const validateUserUpdate = require("../middleware/validate-update");
 const router = express.Router();
 
 // GET all users for Co-Make
-router.get("/", restricted, (req, res) => {
+// Need to add 'restricted' middleware after testing is complete
+router.get("/", (req, res) => {
   Users.find()
     .then(users => {
       res.status(401).json(users);

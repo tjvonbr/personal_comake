@@ -5,10 +5,11 @@ const Users = require("../routers/users-model");
 
 module.exports = (req, res, next) => {
   const token = req.headers.authorization;
-
+  const secret = process.env.JWT_SECRET;
+  
   //verify the token
   if (token) {
-    jwt.verify(token, secret.jwtSecret, function(err, decodedToken) {
+    jwt.verify(token, secret, function(err, decodedToken) {
       if (err) {
         res.status(401).json({ message: err });
         console.log(err)
