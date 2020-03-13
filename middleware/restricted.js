@@ -8,11 +8,10 @@ module.exports = (req, res, next) => {
 
   //verify the token
   if (token) {
-    jwt.verify(token, secret.jwtSecret, (err, decodedToken) => {
+    jwt.verify(token, secret.jwtSecret, function(err, decodedToken) {
       if (err) {
-        console.log("token is:", token, "error is:", err);
-
-        res.status(401).json({ message: "Not a verified user" });
+        res.status(401).json({ message: err });
+        console.log(err)
       } else {
         req.jwtToken = decodedToken;
         console.log(" restricted secret.jwtsecret:", secret.jwtSecret);
