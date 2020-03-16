@@ -8,6 +8,12 @@ module.exports = {
       filename: './dev.sqlite3'
     },
     useNullAsDefault: true,
+    migrations: {
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
+    } 
   },
 
   staging: {
@@ -36,8 +42,10 @@ module.exports = {
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
     }
   }
-
 };
