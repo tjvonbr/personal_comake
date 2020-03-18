@@ -8,9 +8,7 @@ const validateRegister = require("../middleware/validate-registration");
 const validateLogin = require("../middleware/validate-login");
 const router = express.Router();
 
-// Check to see if secret is coming through from .env file
-console.log("SECRET", process.env.JWT_SECRET)
-
+// Register a user
 router.post("/register", validateRegister, (req, res) => {
   let user = req.body;
 
@@ -25,6 +23,7 @@ router.post("/register", validateRegister, (req, res) => {
     });
 });
 
+// Login a user
 router.post("/login", validateLogin, (req, res) => {
   let { username, password } = req.body;
 
@@ -39,8 +38,7 @@ router.post("/login", validateLogin, (req, res) => {
         res.status(200).json({
           message: `Welcome, ${user.username}!`,
           id: user.id,
-          zipCode: user.zipCode,
-          token: token
+          token: token,
         });
       } else {
         res.status(401).json({ message: "Invalid Credentials" });
@@ -53,6 +51,7 @@ router.post("/login", validateLogin, (req, res) => {
     });
 });
 
+// Generate a token
 const generateToken = user => {
   const payload = {
     id: user.id,

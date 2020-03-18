@@ -8,8 +8,7 @@ const validateIssue = require("../middleware/validate-issue");
 
 const router = express.Router();
 
-//GET request  list of all issues
-
+// Fetch all issues
 router.get("/", restricted, (req, res) => {
   console.log("req.jwtToken", req.jwtToken);
   Issues.find()
@@ -19,8 +18,7 @@ router.get("/", restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
-//GET issue by id
-
+// Fetch issue by ID
 router.get("/:id", restricted, async (req, res) => {
   const id = req.params.id;
   console.log("req.jwtToken", req.jwtToken);
@@ -37,8 +35,7 @@ router.get("/:id", restricted, async (req, res) => {
   }
 });
 
-//GET issue by User id
-
+// Fetch all issues for specific user
 router.get("/:id/user/issues", restricted, async (req, res) => {
   const id = req.params.id;
   console.log("req.jwtToken", req.jwtToken);
@@ -57,8 +54,7 @@ router.get("/:id/user/issues", restricted, async (req, res) => {
   }
 });
 
-//GET Comments by issue
-
+// Still don't know what this function does
 router.get("/:id/comments", restricted, async (req, res) => {
   const id = req.params.id;
   console.log("req.jwtToken", req.jwtToken);
@@ -77,8 +73,7 @@ router.get("/:id/comments", restricted, async (req, res) => {
   }
 });
 
-//GET issue object with comments array attached
-
+// Fetch issues with comments
 router.get("/:id/withComments", async (req, res) => {
   const id = req.params.id;
 
@@ -98,34 +93,22 @@ router.get("/:id/withComments", async (req, res) => {
   }
 });
 
-//ADD an Issue with model generating category
-
-router.post("/", restricted, validateIssue, async (req, res) => {
-  // console.log("req.jwtToken", req.jwtToken);
+// Add an issue
+router.post("/", restricted, validateIssue, (req, res) => {
   const issue = req.body;
 
-  try {
-    const issueWithCategory = await axios
-      .post(
-        "https://comakecategorizer.herokuapp.com/api/",
-        (issue.description, issue.issue_name)
-      )
-      .then(res =>
-        console.log("retrieved category!", (issue.category = res.data))
-      )
-      .catch(err => console.log("FAILED CATEGORY", err));
-    console.log("With new Category", issue);
-
-    const newIssue = await Issues.add(issue);
-    res.status(201).json(newIssue);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
-  }
+  Issues.add(issue)
+    .then(newIssue => {
+      console.log(newIssue);
+      res.status(201).json(newIssue);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json(error);
+    })
 });
 
-//UPDATE an issue
-
+// Update an issue
 router.put("/:id", restricted, validateIssue, (req, res) => {
   const id = req.params.id;
   console.log(id);
