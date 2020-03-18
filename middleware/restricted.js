@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
   
   //verify the token
   if (token) {
-    jwt.verify(token, secret.jwtSecret, function(err, decodedToken) {
+    jwt.verify(token, process.env.JWT_SECRET, function(err, decodedToken) {
       if (err) {
         res.status(401).json({ message: err });
         console.log(err)
