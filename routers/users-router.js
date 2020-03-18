@@ -7,11 +7,10 @@ const validateUserUpdate = require("../middleware/validate-update");
 const router = express.Router();
 
 // GET all users for Co-Make
-// Need to add 'restricted' middleware after testing is complete
-router.get("/", (req, res) => {
+router.get("/", restricted, (req, res) => {
   Users.find()
     .then(users => {
-      res.status(401).json(users);
+      res.status(200).json(users);
     })
     .catch(err => {
       console.log(err);
@@ -19,41 +18,35 @@ router.get("/", (req, res) => {
     });
 });
 
-// GET request users profile
-router.get("/:id", restricted, async (req, res) => {
-  console.log("req.jwtToken", req.jwtToken);
+// GET request user's profile
+router.get("/:id", restricted, (req, res) => {
   const { id } = req.params;
-  try {
-    const getUser = await Users.findById(id);
-    if (getUser) {
-      res.status(200).json(getUser);
-    } else {
-      res.status(404).json({ message: "wrong user info" });
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "We ran into an error retrieving the user" });
-  }
-});
 
-//GET request  list of issues created by this user
+  Users.findById(id)
+    .then(user => {
+      res.status(200).json(user);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).json({ error: "We ran into an error retrieving the user" });
+    })
+  }); 
 
+// GET request list of issues created by this user
 router.get("/:id/issues", restricted, (req, res) => {
-  console.log("req.jwtToken", req.jwtToken);
-  const id = req.params.id;
-  try {
-    Users.getUserWithIssues(id).then(user => {
+  const { id } = req.params;
+
+    Users.getUserWithIssues(id)
+      .then(user => {
       res.json(user);
+    })
+      .catch(error => {
+        console.log(error)
+        res.status(500).json({ message: "We ran into an error retrieving the user" });
     });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "We ran into an error retrieving the user" });
-  }
 });
 
-//UPDATE user
-
+// UPDATE user
 router.put("/:id", restricted, validateUserUpdate, (req, res) => {
   const id = req.params.id;
   console.log(id);
@@ -69,8 +62,7 @@ router.put("/:id", restricted, validateUserUpdate, (req, res) => {
     });
 });
 
-//DELETE a user
-
+// DELETE a user
 router.delete("/:id", restricted, async (req, res) => {
   const id = req.params.id;
   try {

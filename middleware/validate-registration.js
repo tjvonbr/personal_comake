@@ -6,9 +6,10 @@ function validateRegister(req, res, next) {
   if (!email || !username || !zipCode || !password) {
     res
       .status(400)
-      .json({ message: "You're missing one of the following fields:  username, email, password, or zip code!" });
+      .json({ 
+        message: "You're missing one of the following fields:  username, email, password, or zip code!" 
+      });
   } else {
-    console.log("validated")
     next();
   }
 }
