@@ -10,18 +10,14 @@ module.exports = (req, res, next) => {
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, function(err, decodedToken) {
       if (err) {
-        res.status(401).json({ message: err });
+        res.status(401).json({ message: "There has been en error retrieving the token!" });
         console.log(err)
       } else {
         req.jwtToken = decodedToken;
-        console.log(" restricted secret.jwtsecret:", secret.jwtSecret);
-        console.log("decoded subject:", decodedToken.subject);
-
-        //anything running after this middleware can now use this req.jwtToken
         next();
       }
     });
   } else {
-    res.status(400).json({ message: "no token provided" });
+    res.status(400).json({ message: "No token has been provided!" });
   }
 };
