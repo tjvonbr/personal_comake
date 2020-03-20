@@ -36,7 +36,7 @@ router.get("/:id", restricted, (req, res) => {
 router.get("/:id/issues", restricted, (req, res) => {
   const { id } = req.params;
 
-    Users.getUserWithIssues(id)
+    Users.getIssuesByUserId(id)
       .then(user => {
       res.json(user);
     })

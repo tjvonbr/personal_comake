@@ -124,8 +124,7 @@ router.put("/:id", restricted, validateIssue, (req, res) => {
     });
 });
 
-//DELETE an issue
-
+// Delete an issue
 router.delete("/:id", restricted, async (req, res) => {
   const id = req.params.id;
   try {
