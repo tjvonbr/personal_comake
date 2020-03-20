@@ -1,9 +1,9 @@
 module.exports = validateRegister;
 
 function validateRegister(req, res, next) {
-  const { email, username, zipCode, password} = req.body;
+  const { email, username, zipcode, password} = req.body;
 
-  if (!email || !username || !zipCode || !password) {
+  if (!email || !username || !zipcode || !password) {
     res
       .status(400)
       .json({ 
