@@ -1,17 +1,22 @@
 
 exports.up = function(knex) {
   return knex.schema.createTable("issues", issues => {
-    issues.increments()
     issues
-      .string("title") // Defaults to 255 chars
+      .increments()
+    issues
+      .string("title") // Defaults to 255 characters
       .notNullable()
       .unique()
     issues
-      .text("description", "longtext")
+      .text("description")
       .notNullable()
       .unique()
+    issues
+      .integer("zipcode")
+      .notNullable()
     issues
       .integer("upvotes")
+      .defaultTo(0)
     issues
       .integer("user_id")
       .unsigned()

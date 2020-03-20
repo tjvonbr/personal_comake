@@ -1,9 +1,10 @@
 
 exports.up = function(knex) {
   return knex.schema.createTable("users", users => {
-    users.increments()
     users
-      .string("username") // Defaults to 255 chars
+      .increments()
+    users
+      .string("username") // Defaults to 255 characters
       .notNullable()
       .unique()
     users
@@ -17,7 +18,10 @@ exports.up = function(knex) {
       .integer("zipcode")
       .notNullable()
     users
-      .string("biography")
+      .string("bio")
+    users
+      .integer("posted_issues")
+      .defaultTo(0)
   })
 };
 
