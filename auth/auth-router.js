@@ -16,7 +16,19 @@ router.post("/register", validateRegister, (req, res) => {
   user.password = hash;
   Users.add(user)
     .then(saved => {
-      res.status(201).json(saved);
+      // Generate token -- still having issues with importing .env value
+      const token = generateToken(saved);
+
+      res.status(201)
+      .json({
+        message: `Thanks for signing up, ${saved.username}!`,
+        id: saved.id,
+        firstName: saved.first_name,
+        lastName: saved.last_name,
+        zipcode: saved.zipcode,
+        joined: saved.joined,
+        token: token,
+      });
     })
     .catch(error => {
       res.status(500).json(error);
