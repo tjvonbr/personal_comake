@@ -35,6 +35,18 @@ router.get("/:id", restricted, async (req, res) => {
   }
 });
 
+router.get("/zip/:zip", restricted, (req, res) => {
+  const { zip } = req.params;
+  
+  Issues.getIssuesByZip(zip)
+    .then(commIssues => {
+      res.status(200).json(commIssues);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+})
+
 // Fetch all issues for specific user
 router.get("/:id/user/issues", restricted, async (req, res) => {
   const id = req.params.id;
@@ -109,18 +121,18 @@ router.post("/", restricted, validateIssue, (req, res) => {
 });
 
 // Update an issue
-router.put("/:id", restricted, validateIssue, (req, res) => {
-  const id = req.params.id;
-  console.log(id);
+router.put("/:id", restricted, (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
 
-  Issues.update(id, req.body)
+  Issues.update(id, changes)
     .then(issue => {
       res.status(200).json(issue);
     })
     .catch(error => {
       res
         .status(500)
-        .json({ message: "We ran into an error updating the issue" });
+        .json({ message: "We ran into an error updating the issue!" });
     });
 });
 

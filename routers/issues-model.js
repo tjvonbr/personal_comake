@@ -7,6 +7,7 @@ module.exports = {
   findById,
   getCommentsByIssueId,
   getIssueWithComments,
+  getIssuesByZip,
   getIssuesByUserId,
   remove,
   update
@@ -41,6 +42,10 @@ function getCommentsByIssueId(id) {
 
 function getIssuesByUserId(id) {
   return db("issues").where({ user_id: id });
+}
+
+function getIssuesByZip(zip) {
+  return db("issues").where({ zipcode: zip })
 }
 
 function remove(id) {
