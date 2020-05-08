@@ -2,7 +2,6 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const Users = require("./users-model");
 const restricted = require("../middleware/restricted");
-const validateUserUpdate = require("../middleware/validate-update");
 
 const router = express.Router();
 
@@ -47,15 +46,15 @@ router.get("/:id/issues", restricted, (req, res) => {
 });
 
 // UPDATE user
-router.put("/:id", restricted, validateUserUpdate, (req, res) => {
+router.put("/:id", restricted, (req, res) => {
   const id = req.params.id;
-  console.log(id);
 
   Users.update(id, req.body)
     .then(user => {
       res.status(200).json(user);
     })
     .catch(error => {
+      console.log(error)
       res
         .status(500)
         .json({ message: "We ran into an error updating the user" });

@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const axios = require("axios");
 
 const Issues = require("./issues-model");
+const Upvotes = require("./upvotes-model");
 const restricted = require("../middleware/restricted");
 const validateIssue = require("../middleware/validate-issue");
 
@@ -18,13 +19,13 @@ router.get("/", restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
-// Fetch issue by ID
+// Fetch issue by id
 router.get("/:id", restricted, async (req, res) => {
   const id = req.params.id;
-  console.log("req.jwtToken", req.jwtToken);
+
   try {
-    const getIssue = await Issues.findById(id);
-    if (getIssue) {
+    const issue = await Issues.findById(id);
+    if (issue) {
       res.status(200).json(getIssue);
     } else {
       res.status(404).json({ message: "wrong user info" });
@@ -35,75 +36,39 @@ router.get("/:id", restricted, async (req, res) => {
   }
 });
 
-router.get("/zip/:zip", restricted, (req, res) => {
-  const { zip } = req.params;
-  
-  Issues.getIssuesByZip(zip)
-    .then(commIssues => {
-      res.status(200).json(commIssues);
+// Create an upvote for an individual issue
+router.post("/:id/upvotes", restricted, (req, res) => {
+  const upvote = req.body;
+  const {id} = req.params;
+
+  Upvotes.insertUpvote(upvote, id)
+    .then(saved => {
+      res.status(201).json({saved})
     })
     .catch(error => {
-      res.status(500).send(error);
+      console.log(error);
+      if (error.errno == 19) {
+        res.status(500).json({message: 'An upvote for this particular issue by this user has already been registered!'});
+      } else {
+        res.status(500).json(error)
+      }
     })
+});
+
+// Fetch upvotes for an individual issue
+router.get("/:id/upvotes", restricted, (req, res) => {
+  const issue_id = req.params.id;
+  
+  Upvotes.findVoteByIssueId(issue_id)
+  .then(issue => {
+    console.log(issue)
+    res.status(200).json(issue)
+  })
+  .catch(error => {
+    res.status(500).json(error)
+    console.log(error)
+  })
 })
-
-// Fetch all issues for specific user
-router.get("/:id/user/issues", restricted, async (req, res) => {
-  const id = req.params.id;
-  console.log("req.jwtToken", req.jwtToken);
-  try {
-    const getIssues = await Issues.getIssuesByUserId(id);
-    if (getIssues) {
-      res.status(200).json(getIssues);
-    } else {
-      res.status(404).json({ message: "wrong user id" });
-    }
-  } catch (error) {
-    console.log(error);
-    res
-      .status(500)
-      .json({ error: "We ran into an error retrieving the issues" });
-  }
-});
-
-// Still don't know what this function does
-router.get("/:id/comments", restricted, async (req, res) => {
-  const id = req.params.id;
-  console.log("req.jwtToken", req.jwtToken);
-  try {
-    const getComments = await Issues.getCommentsByIssueId(id);
-    if (getComments) {
-      res.status(200).json(getComments);
-    } else {
-      res.status(404).json({ message: "Issue with that ID does not exist" });
-    }
-  } catch (error) {
-    console.log(error);
-    res
-      .status(500)
-      .json({ error: "We ran into an error retrieving the comments" });
-  }
-});
-
-// Fetch issues with comments
-router.get("/:id/withComments", async (req, res) => {
-  const id = req.params.id;
-
-  try {
-    const findIssue = await Issues.findById(id);
-    console.log("is the issue found:", findIssue);
-    const issueWithComments = await Issues.getIssueWithComments(id);
-    if (findIssue) {
-      res.status(200).json(issueWithComments);
-    } else {
-      res.status(404).json({
-        message: "Unable to locate comments from an issue with that id"
-      });
-    }
-  } catch (error) {
-    res.status(500).json({ error: "Error trying to get Issue Object" });
-  }
-});
 
 // Add an issue
 router.post("/", restricted, validateIssue, (req, res) => {

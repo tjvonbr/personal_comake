@@ -7,6 +7,7 @@ const validateCommentUpvote = require("../middleware/validate-comment-upvote");
 
 const router = express.Router();
 
+// Fetch all issues
 router.get("/issues", restricted, (req, res) => {
   const id = req.params.id;
   console.log("req.jwtToken", req.jwtToken);
@@ -16,9 +17,9 @@ router.get("/issues", restricted, (req, res) => {
     })
     .catch(err => res.send(err));
 });
-//GET upvotes list for issues
 
-router.get("/issue/:id", restricted, (req, res) => {
+// Fetch upvotes list for all issues
+router.get("/issues/:id", restricted, (req, res) => {
   const id = req.params.id;
   console.log("req.jwtToken", req.jwtToken);
   Upvotes.issueVoteById(id)
@@ -29,7 +30,6 @@ router.get("/issue/:id", restricted, (req, res) => {
 });
 
 //GET upvotes list for issues
-
 router.get("/comment/:id", restricted, (req, res) => {
   const id = req.params.id;
   console.log("req.jwtToken", req.jwtToken);
@@ -39,38 +39,8 @@ router.get("/comment/:id", restricted, (req, res) => {
     })
     .catch(err => res.send(err));
 });
-//Post and upvote to an Issue
 
-router.post("/issue", restricted, validateIssueUpvote, async (req, res) => {
-  console.log("req.jwtToken", req.jwtToken);
-  const vote = req.body;
-  try {
-    const upvote = await Upvotes.upvoteIssue(vote);
-    console.log("upvote=", upvote);
-    res.status(201).json(upvote);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
-  }
-});
-
-//Post and upvote to a comment
-router.post("/comment", restricted, validateCommentUpvote, async (req, res) => {
-  console.log("req.jwtToken", req.jwtToken);
-  const vote = req.body;
-  try {
-    const upvote = await Upvotes.upvoteComment(vote);
-    console.log("upvote=", upvote);
-
-    res.status(201).json(upvote);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
-  }
-});
-
-//DELETE upvote on issue
-
+// DELETE upvote on issue
 router.delete("/:id/issue", restricted, async (req, res) => {
   const id = req.params.id;
   try {
@@ -89,7 +59,6 @@ router.delete("/:id/issue", restricted, async (req, res) => {
 });
 
 //DELETE upvote on comment
-
 router.delete("/:id/comment", restricted, async (req, res) => {
   const id = req.params.id;
   try {
