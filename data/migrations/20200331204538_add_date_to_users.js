@@ -2,7 +2,9 @@
 exports.up = function(knex) {
   return knex.schema.table("users", users => {
     users
-      .date("joined")
+      .timestamp("joined")
+      .notNullable()
+      .defaultTo(knex.fn.now())
   })
 };
 

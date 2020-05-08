@@ -1,49 +1,37 @@
 const db = require("../data/db-config");
 
 module.exports = {
-  upvoteIssue,
-  upvoteComment,
-  findIssueUpvotes,
-  findVoteById,
-  findCommentUpvotes,
+  findVoteBy,
+  insertUpvote,
+  findVoteByIssueId,
   issueVoteById,
   commentVoteById,
   removeIssueUpvote,
-  removeCommentUpvote
+  removeCommentUpvote,
+  findVoteByIssueId
 };
 
-function findIssueUpvotes() {
-  return db("issueUpvotes");
-}
-
-function findCommentUpvotes() {
-  return db("commentUpvotes");
-}
-
-//Add an upvote to an issue
-function upvoteIssue(upvote) {
-  return db("issueUpvotes")
+function insertUpvote(upvote) {
+  return db("upvotes")
     .insert(upvote, "id")
     .then(ids => {
-      const [id] = ids;
-      return findVoteById(id);
-    });
+      const {id} = ids;
+      return findVoteBy(id)
+    })
 }
 
-//Add an upvote to an comment
-function upvoteComment(upvote) {
-  return db("commentUpvotes")
-    .insert(upvote, "id")
-    .then(ids => {
-      const [id] = ids;
-      return commentVoteById(id);
-    });
+function findVoteBy(id) {
+  return db("upvotes").where(id);
 }
 
-function findVoteById(id) {
-  return db("issueUpvotes")
-    .where({ id })
-    .first();
+function findVoteByIssueId(issue_id) {
+  return db("upvotes")
+  .where({ issue_id })
+  .first()
+}
+
+function findVoteByIssueId(issue_id) {
+  return db("upvotes").where({issue_id})
 }
 
 function issueVoteById(id) {
