@@ -11,7 +11,6 @@ const router = express.Router();
 
 // Fetch all issues
 router.get("/", restricted, (req, res) => {
-  console.log("req.jwtToken", req.jwtToken);
   Issues.find()
     .then(issues => {
       res.json(issues);
@@ -20,30 +19,40 @@ router.get("/", restricted, (req, res) => {
 });
 
 // Fetch issue by id
-router.get("/:id", restricted, async (req, res) => {
-  const id = req.params.id;
+router.get("/:id", restricted, (req, res) => {
+  const {id} = req.params;
 
-  try {
-    const issue = await Issues.findById(id);
-    if (issue) {
-      res.status(200).json(getIssue);
-    } else {
-      res.status(404).json({ message: "wrong user info" });
-    }
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "We ran into an error retrieving the user" });
-  }
+  Issues.findById(id)
+    .then(issue => {
+      res.status(200).json(issue)
+    })
+    .catch(error => {
+      res.status(500).json(error)
+    })
 });
+
+// Fetch all issues by zipcode
+router.get("/zip/:zipcode", restricted, (req, res) => {
+  const {zipcode} = req.params;
+
+  Issues.findByZip(zipcode)
+    .then(issues => {
+      res.status(200).json(issues)
+    })
+    .catch(error => {
+      res.status(500).json(error)
+    })
+})
 
 // Create an upvote for an individual issue
 router.post("/:id/upvotes", restricted, (req, res) => {
   const upvote = req.body;
   const {id} = req.params;
 
-  Upvotes.insertUpvote(upvote, id)
-    .then(saved => {
-      res.status(201).json({saved})
+  Upvotes.insertUpvote(upvote)
+    .then(response => {
+      console.log(response)
+      res.status(201).json(response)
     })
     .catch(error => {
       console.log(error);

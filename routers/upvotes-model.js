@@ -13,15 +13,15 @@ module.exports = {
 
 function insertUpvote(upvote) {
   return db("upvotes")
-    .insert(upvote, "id")
-    .then(ids => {
-      const {id} = ids;
-      return findVoteBy(id)
+    .insert(upvote)
+    .then(newUpvotes => {
+      const [newUpvote] = newUpvotes
+      return findVoteBy(newUpvote)
     })
 }
 
 function findVoteBy(id) {
-  return db("upvotes").where(id);
+  return db("upvotes").where({id});
 }
 
 function findVoteByIssueId(issue_id) {
