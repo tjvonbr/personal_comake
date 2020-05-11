@@ -19,8 +19,12 @@ router.post("/register", validateRegister, (req, res) => {
       // Generate token -- still having issues with importing .env value
       const token = generateToken(saved);
 
-      res.status(201)
-      .json(saved);
+      res.status(201).json({
+        username: saved.username,
+        zipcode: saved.zipcode,
+        postedIssues: saved.posted_issues,
+        token: token
+      });
     })
     .catch(error => {
       console.log(error);
@@ -40,7 +44,13 @@ router.post("/login", validateLogin, (req, res) => {
         // Generate token -- still having issues with importing .env value
         const token = generateToken(user);
 
-        res.status(200).json({user, token});
+        res.status(200).json({
+          id: user.id,
+          username: user.username,
+          zipcode: user.zipcode,
+          postedIssues: user.posted_issues,
+          token: token
+        });
       } else {
         res.status(401).json({ message: "Invalid Credentials" });
       }

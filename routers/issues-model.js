@@ -5,6 +5,7 @@ module.exports = {
   find,
   findBy,
   findById,
+  findByZip,
   getCommentsByIssueId,
   getIssueWithComments,
   getIssuesByZip,
@@ -34,6 +35,11 @@ function findById(id) {
   return db("issues")
     .where({ id })
     .first();
+}
+
+function findByZip(zipcode) {
+  return db("issues")
+    .where({ zipcode })
 }
 
 function getCommentsByIssueId(id) {
