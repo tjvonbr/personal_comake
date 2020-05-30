@@ -1,8 +1,10 @@
 const db = require("../data/db-config");
 
 module.exports = {
-  findVoteBy,
+  findVotes,
   insertUpvote,
+  findVoteBy,
+  findVotesBy,
   findVoteByIssueId,
   issueVoteById,
   commentVoteById,
@@ -10,6 +12,14 @@ module.exports = {
   removeCommentUpvote,
   findVoteByIssueId
 };
+
+function findVotes() {
+  return db("upvotes")
+}
+
+function findVotesBy(user_id) {
+  return db("upvotes").where({user_id})
+}
 
 function insertUpvote(upvote) {
   return db("upvotes")
@@ -21,7 +31,11 @@ function insertUpvote(upvote) {
 }
 
 function findVoteBy(id) {
-  return db("upvotes").where({id});
+  return db("upvotes").where({id})
+}
+
+function findVotesByUser(id) {
+  return db("upvotes").where({id})
 }
 
 function findVoteByIssueId(issue_id) {

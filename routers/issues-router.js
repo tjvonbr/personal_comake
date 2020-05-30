@@ -1,7 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const axios = require("axios");
-
 const Issues = require("./issues-model");
 const Upvotes = require("./upvotes-model");
 const restricted = require("../middleware/restricted");
@@ -47,7 +46,6 @@ router.get("/zip/:zipcode", restricted, (req, res) => {
 // Create an upvote for an individual issue
 router.post("/:id/upvotes", restricted, (req, res) => {
   const upvote = req.body;
-  const {id} = req.params;
 
   Upvotes.insertUpvote(upvote)
     .then(response => {
@@ -113,6 +111,7 @@ router.put("/:id", restricted, (req, res) => {
 // Delete an issue
 router.delete("/:id", restricted, async (req, res) => {
   const id = req.params.id;
+  
   try {
     const deleteIssue = await Issues.remove(id);
     console.log(deleteIssue);

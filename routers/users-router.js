@@ -1,11 +1,11 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
+const Upvotes = require("./upvotes-model")
 const Users = require("./users-model");
 const restricted = require("../middleware/restricted");
 
 const router = express.Router();
 
-// GET all users for Co-Make
+// Fetch all users
 router.get("/", restricted, (req, res) => {
   Users.find()
     .then(users => {
@@ -17,7 +17,7 @@ router.get("/", restricted, (req, res) => {
     });
 });
 
-// GET request user's profile
+// Fetch user by ID
 router.get("/:id", restricted, (req, res) => {
   const { id } = req.params;
 
@@ -31,7 +31,7 @@ router.get("/:id", restricted, (req, res) => {
     })
   }); 
 
-// GET request list of issues created by this user
+// Fetch all issues created by user
 router.get("/:id/issues", restricted, (req, res) => {
   const { id } = req.params;
 
@@ -45,7 +45,22 @@ router.get("/:id/issues", restricted, (req, res) => {
     });
 });
 
-// UPDATE user
+// Fetch all upvotes for a user
+router.get("/:id/upvotes", restricted, (req, res) => {
+  const { id } = req.params;
+
+  Upvotes.findVotesBy(id)
+    .then(upvotes => {
+      res.status(200).json(upvotes);
+    })
+    .catch(error => {
+      res
+        .status(500)
+        .send(error);
+    })
+})
+
+// Update a user
 router.put("/:id", restricted, (req, res) => {
   const id = req.params.id;
 
@@ -61,7 +76,7 @@ router.put("/:id", restricted, (req, res) => {
     });
 });
 
-// DELETE a user
+// Delete a user
 router.delete("/:id", restricted, async (req, res) => {
   const id = req.params.id;
   try {
