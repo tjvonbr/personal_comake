@@ -8,10 +8,8 @@ const validateCommentUpvote = require("../middleware/validate-comment-upvote");
 const router = express.Router();
 
 // Fetch all issues
-router.get("/issues", restricted, (req, res) => {
-  const id = req.params.id;
-  console.log("req.jwtToken", req.jwtToken);
-  Upvotes.findIssueUpvotes()
+router.get("/", restricted, (req, res) => {
+  Upvotes.findVotes()
     .then(votes => {
       res.json(votes);
     })
@@ -29,7 +27,7 @@ router.get("/issues/:id", restricted, (req, res) => {
     .catch(err => res.send(err));
 });
 
-//GET upvotes list for issues
+// GET upvotes list for issues
 router.get("/comment/:id", restricted, (req, res) => {
   const id = req.params.id;
   console.log("req.jwtToken", req.jwtToken);
