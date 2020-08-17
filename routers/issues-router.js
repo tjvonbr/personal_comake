@@ -32,7 +32,7 @@ router.get("/:id", restricted, (req, res) => {
 
 // Fetch all issues by zipcode
 router.get("/zip/:zipcode", restricted, (req, res) => {
-  const {zipcode} = req.params;
+  const { zipcode } = req.params;
 
   Issues.findByZip(zipcode)
     .then(issues => {
@@ -44,7 +44,7 @@ router.get("/zip/:zipcode", restricted, (req, res) => {
 })
 
 // Create an upvote for an individual issue
-router.post("/:id/upvotes", restricted, (req, res) => {
+router.post("/:id/upvotes", (req, res) => {
   const upvote = req.body;
 
   Upvotes.insertUpvote(upvote)
@@ -57,6 +57,7 @@ router.post("/:id/upvotes", restricted, (req, res) => {
       if (error.errno == 19) {
         res.status(500).json({message: 'An upvote for this particular issue by this user has already been registered!'});
       } else {
+        console.log(error)
         res.status(500).json(error)
       }
     })
@@ -83,12 +84,17 @@ router.post("/", restricted, validateIssue, (req, res) => {
 
   Issues.add(issue)
     .then(newIssue => {
-      console.log(newIssue);
-      res.status(201).json(newIssue);
+      res.status(201).json({
+        message: "Success!",
+        issues: newIssue
+      });
     })
     .catch(error => {
       console.log(error);
-      res.status(500).json(error);
+      res.status(500).json({
+        message: "Failed to create a new issue!",
+        error
+      });
     })
 });
 
@@ -102,6 +108,7 @@ router.put("/:id", restricted, (req, res) => {
       res.status(200).json(issue);
     })
     .catch(error => {
+      console.log("ERROR", error)
       res
         .status(500)
         .json({ message: "We ran into an error updating the issue!" });
@@ -114,7 +121,6 @@ router.delete("/:id", restricted, async (req, res) => {
   
   try {
     const deleteIssue = await Issues.remove(id);
-    console.log(deleteIssue);
     if (deleteIssue > 0) {
       res.status(200).json({ message: "The Issue has been deleted" });
     } else {

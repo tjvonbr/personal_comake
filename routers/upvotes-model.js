@@ -18,7 +18,9 @@ function findVotes() {
 }
 
 function findVotesBy(user_id) {
-  return db("upvotes").where({user_id})
+  return db("upvotes")
+    .select('issue_id')
+    .where({user_id})
 }
 
 function insertUpvote(upvote) {
@@ -31,10 +33,6 @@ function insertUpvote(upvote) {
 }
 
 function findVoteBy(id) {
-  return db("upvotes").where({id})
-}
-
-function findVotesByUser(id) {
   return db("upvotes").where({id})
 }
 
