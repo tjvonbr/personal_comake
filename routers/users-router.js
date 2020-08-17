@@ -36,13 +36,18 @@ router.get("/:id/issues", restricted, (req, res) => {
   const { id } = req.params;
 
     Users.getIssuesByUserId(id)
-      .then(user => {
-      res.json(user);
+      .then(issues => {
+        res.status(200).json({
+          message: "You've successfully fetched your issues!",
+          issues
+        });
     })
       .catch(error => {
         console.log(error)
-        res.status(500).json({ message: "We ran into an error retrieving the user" });
-    });
+        res.status(500).json({ 
+          message: "We ran into an error retrieving the issues."
+        });
+      });
 });
 
 // Fetch all upvotes for a user
@@ -51,6 +56,7 @@ router.get("/:id/upvotes", restricted, (req, res) => {
 
   Upvotes.findVotesBy(id)
     .then(upvotes => {
+      console.log(upvotes)
       res.status(200).json(upvotes);
     })
     .catch(error => {
@@ -62,7 +68,7 @@ router.get("/:id/upvotes", restricted, (req, res) => {
 
 // Update a user
 router.put("/:id", restricted, (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
 
   Users.update(id, req.body)
     .then(user => {
