@@ -117,7 +117,7 @@ router.put("/:id", restricted, (req, res) => {
 
 // Delete an issue
 router.delete("/:id", restricted, async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   
   try {
     const deleteIssue = await Issues.remove(id);
@@ -132,5 +132,18 @@ router.delete("/:id", restricted, async (req, res) => {
     res.status(500).json({ error: "Error trying to delete Issue" });
   }
 });
+
+// Add a resolution vote
+router.patch("/:id", restricted, async (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  try {
+    const updated = await Issues.update(id, changes);
+    res.status(200).json(updated);
+  } catch (error) {
+    console.log(error);
+  }
+})
 
 module.exports = router;
