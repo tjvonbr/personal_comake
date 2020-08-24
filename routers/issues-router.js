@@ -49,7 +49,7 @@ router.post("/:id/upvotes", (req, res) => {
 
   Upvotes.insertUpvote(upvote)
     .then(response => {
-      console.log(response)
+      console.log(response);
       res.status(201).json(response)
     })
     .catch(error => {
